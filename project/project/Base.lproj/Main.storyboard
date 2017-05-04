@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Amg-0g-mNj">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="project" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZpK-As-key" customClass="CanvasView" customModule="project" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="108" width="1024" height="660"/>
+                            </imageView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQt-XT-aan">
+                                <rect key="frame" x="0.0" y="64" width="1024" height="44"/>
+                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zwm-MX-DZT" customClass="ColourButton" customModule="project" customModuleProvider="target">
+                                <rect key="frame" x="366" y="72" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                        <color key="value" red="0.12156862745098039" green="0.59215686274509804" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isBlueButton" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isBlackButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRedButton" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnPushButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="58P-bD-Wcb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Uz-DE-7Te" customClass="ColourButton" customModule="project" customModuleProvider="target">
+                                <rect key="frame" x="423" y="72" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isBlueButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isBlackButton" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRedButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnPushButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q6K-I6-bSs"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hq5-Va-sPO" customClass="ColourButton" customModule="project" customModuleProvider="target">
+                                <rect key="frame" x="476" y="72" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isBlueButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isBlackButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRedButton" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                        <color key="value" red="0.97960978403141363" green="0.1608025280167005" blue="0.27662556130710286" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnPushButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vid-2h-Qma"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="MQt-XT-aan" secondAttribute="trailing" id="5mf-bv-cSU"/>
+                            <constraint firstItem="ZpK-As-key" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="CnD-vI-cNK"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Ki5-d4-1WK"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="ZpK-As-key" secondAttribute="leading" id="U5x-Cx-Ti4"/>
+                            <constraint firstItem="ZpK-As-key" firstAttribute="top" secondItem="MQt-XT-aan" secondAttribute="bottom" id="WXJ-JO-pT5"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="trailing" secondItem="ZpK-As-key" secondAttribute="trailing" id="Xi9-3K-tLk"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="qzV-nb-HxX"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="O5s-31-Khz"/>
+                    <connections>
+                        <outlet property="canvasView" destination="ZpK-As-key" id="hUZ-gq-WrB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1586.1328125" y="137.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="agm-xR-3ki">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Amg-0g-mNj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NBk-DB-yfK">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="LN0-7R-1Sa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="289-Q7-3tF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="861.9140625" y="137.5"/>
+        </scene>
+    </scenes>
+</document>
