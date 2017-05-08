@@ -16,6 +16,7 @@ class ColourButton: UIButton {
     @IBInspectable var isBlueButton: Bool = true
     @IBInspectable var isBlackButton: Bool = true
     @IBInspectable var isRedButton: Bool = true
+    @IBInspectable var eraser: Bool = true
 
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath(ovalIn: rect)
@@ -30,6 +31,10 @@ class ColourButton: UIButton {
         
         if (isRedButton) {
             
+        }
+        
+        if (eraser) {
+            fillColor = UIColor.white
         }
         
         

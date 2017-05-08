@@ -13,7 +13,7 @@ let π = CGFloat(M_PI)
 class CanvasView: UIImageView {
     
     // Parameters
-    fileprivate let defaultLineWidth:CGFloat = 6
+    fileprivate let defaultLineWidth: CGFloat = 6
     
     var drawColor: UIColor = UIColor(red: 0.1215686275, green: 0.5921568627, blue: 1.0, alpha: 1.0)
     
@@ -79,6 +79,7 @@ class CanvasView: UIImageView {
         
         return lineWidth
     }
+    
     
     func clearCanvas(animated: Bool) {
         if animated {

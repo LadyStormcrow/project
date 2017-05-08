@@ -21,6 +21,8 @@ class ViewController: UIViewController {
             canvasView.drawColor = UIColor.black
         } else if button.isRedButton {
             canvasView.drawColor = UIColor(red: 0.9803921569, green: 0.1607843137, blue: 0.2784313725, alpha: 1.0)
+        } else if button.eraser {
+            canvasView.drawColor = UIColor.white
         }
     }
 

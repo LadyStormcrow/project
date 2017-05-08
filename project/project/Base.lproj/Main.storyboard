@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,24 +28,8 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQt-XT-aan">
                                 <rect key="frame" x="0.0" y="64" width="1024" height="44"/>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zwm-MX-DZT" customClass="ColourButton" customModule="project" customModuleProvider="target">
-                                <rect key="frame" x="366" y="72" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
-                                        <color key="value" red="0.12156862745098039" green="0.59215686274509804" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isBlueButton" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isBlackButton" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRedButton" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="btnPushButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="58P-bD-Wcb"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Uz-DE-7Te" customClass="ColourButton" customModule="project" customModuleProvider="target">
-                                <rect key="frame" x="423" y="72" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Uz-DE-7Te" customClass="ColourButton" customModule="project" customModuleProvider="target">
+                                <rect key="frame" x="497" y="70" width="30" height="30"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isBlueButton" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isBlackButton" value="YES"/>
@@ -52,14 +37,14 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
                                         <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="eraser" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="btnPushButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q6K-I6-bSs"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hq5-Va-sPO" customClass="ColourButton" customModule="project" customModuleProvider="target">
-                                <rect key="frame" x="476" y="72" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hq5-Va-sPO" customClass="ColourButton" customModule="project" customModuleProvider="target">
+                                <rect key="frame" x="534" y="70" width="30" height="30"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isBlueButton" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isBlackButton" value="NO"/>
@@ -67,21 +52,63 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
                                         <color key="value" red="0.97960978403141363" green="0.1608025280167005" blue="0.27662556130710286" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="eraser" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="btnPushButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Vid-2h-Qma"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pkn-ox-zQT" customClass="ColourButton" customModule="project" customModuleProvider="target">
+                                <rect key="frame" x="572" y="71" width="30" height="30"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="eraser" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRedButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isBlackButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isBlueButton" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnPushButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4MK-mp-Opm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zwm-MX-DZT" customClass="ColourButton" customModule="project" customModuleProvider="target">
+                                <rect key="frame" x="459" y="70" width="30" height="30"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                        <color key="value" red="0.12156862745098039" green="0.59215686274509804" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isBlueButton" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isBlackButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isRedButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="eraser" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnPushButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="58P-bD-Wcb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="MQt-XT-aan" secondAttribute="trailing" id="5mf-bv-cSU"/>
-                            <constraint firstItem="ZpK-As-key" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="CnD-vI-cNK"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Ki5-d4-1WK"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="ZpK-As-key" secondAttribute="leading" id="U5x-Cx-Ti4"/>
-                            <constraint firstItem="ZpK-As-key" firstAttribute="top" secondItem="MQt-XT-aan" secondAttribute="bottom" id="WXJ-JO-pT5"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="trailing" secondItem="ZpK-As-key" secondAttribute="trailing" id="Xi9-3K-tLk"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="qzV-nb-HxX"/>
+                            <constraint firstAttribute="trailing" secondItem="MQt-XT-aan" secondAttribute="trailing" id="1cN-uf-pcJ"/>
+                            <constraint firstItem="ZpK-As-key" firstAttribute="top" secondItem="Zwm-MX-DZT" secondAttribute="bottom" constant="8" symbolic="YES" id="4NT-VH-ttM"/>
+                            <constraint firstItem="ZpK-As-key" firstAttribute="top" secondItem="MQt-XT-aan" secondAttribute="bottom" id="8Ts-Jd-Vuf"/>
+                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="baseline" secondItem="4Uz-DE-7Te" secondAttribute="baseline" id="AOt-L6-BnO"/>
+                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="top" secondItem="4Uz-DE-7Te" secondAttribute="top" id="BVB-Kc-kg5"/>
+                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="leading" secondItem="Zwm-MX-DZT" secondAttribute="trailing" constant="8" symbolic="YES" id="Blj-Jm-gFT"/>
+                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="baseline" secondItem="Zwm-MX-DZT" secondAttribute="baseline" id="Bqk-ao-vu4"/>
+                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="firstBaseline" secondItem="4Uz-DE-7Te" secondAttribute="firstBaseline" id="Eb0-fI-iA8"/>
+                            <constraint firstItem="ZpK-As-key" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="IZL-hy-Uo2"/>
+                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="firstBaseline" secondItem="Hq5-Va-sPO" secondAttribute="firstBaseline" id="Ien-HM-WdN"/>
+                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="top" secondItem="Hq5-Va-sPO" secondAttribute="top" id="LfJ-Xn-Vfd"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="centerX" secondItem="4Uz-DE-7Te" secondAttribute="centerX" id="Mjv-Wf-9W6"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="O1n-bR-s6m"/>
+                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="baseline" secondItem="Zwm-MX-DZT" secondAttribute="baseline" id="V4f-pz-9eH"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="centerY" secondItem="pkn-ox-zQT" secondAttribute="centerY" id="ZZx-do-JF4"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="trailing" secondItem="ZpK-As-key" secondAttribute="trailing" id="a08-su-P7P"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ceX-Yz-1UX"/>
+                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="firstBaseline" secondItem="4Uz-DE-7Te" secondAttribute="firstBaseline" id="fQP-3z-hj6"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="ZpK-As-key" secondAttribute="leading" id="giP-5V-rg9"/>
+                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="leading" secondItem="4Uz-DE-7Te" secondAttribute="trailing" constant="7" id="hO9-jD-d7g"/>
+                            <constraint firstItem="pkn-ox-zQT" firstAttribute="leading" secondItem="Hq5-Va-sPO" secondAttribute="trailing" constant="8" symbolic="YES" id="vdk-fD-FUi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="O5s-31-Khz"/>
