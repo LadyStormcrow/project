@@ -23,15 +23,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZpK-As-key" customClass="CanvasView" customModule="project" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="108" width="1024" height="660"/>
-                            </imageView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQt-XT-aan">
                                 <rect key="frame" x="0.0" y="64" width="1024" height="44"/>
-                                <items>
-                                    <navigationItem id="v93-Mk-1o4"/>
-                                </items>
                             </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V68-dQ-HXh" customClass="CanvasView" customModule="project" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="108" width="1024" height="660"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="X23-OF-hJp">
+                                <rect key="frame" x="0.0" y="108" width="1024" height="660"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Uz-DE-7Te" customClass="ColourButton" customModule="project" customModuleProvider="target">
                                 <rect key="frame" x="497" y="70" width="30" height="30"/>
                                 <userDefinedRuntimeAttributes>
@@ -89,34 +92,51 @@
                                     <action selector="btnPushButtonWithButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="58P-bD-Wcb"/>
                                 </connections>
                             </button>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="48J-to-UIR">
+                                <rect key="frame" x="610" y="72" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="2at-Ef-ZV3"/>
+                                </constraints>
+                                <state key="normal" title="Text"/>
+                                <connections>
+                                    <action selector="textButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="RNK-og-Zts"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="centerY" secondItem="pkn-ox-zQT" secondAttribute="centerY" id="18a-Ux-eEi"/>
-                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="leading" secondItem="Zwm-MX-DZT" secondAttribute="trailing" constant="8" symbolic="YES" id="4Fk-se-09j"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="ZpK-As-key" secondAttribute="leading" id="4Q5-ez-IdR"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="GWU-NQ-TWv"/>
-                            <constraint firstItem="ZpK-As-key" firstAttribute="top" secondItem="MQt-XT-aan" secondAttribute="bottom" id="Gxu-4v-TWa"/>
-                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="top" secondItem="Hq5-Va-sPO" secondAttribute="top" id="Ih5-mh-5e2"/>
-                            <constraint firstItem="ZpK-As-key" firstAttribute="top" secondItem="Zwm-MX-DZT" secondAttribute="bottom" constant="8" symbolic="YES" id="Krv-lc-UFz"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="centerX" secondItem="4Uz-DE-7Te" secondAttribute="centerX" id="MmC-as-BoU"/>
-                            <constraint firstAttribute="trailing" secondItem="MQt-XT-aan" secondAttribute="trailing" id="Q8E-AB-4kN"/>
-                            <constraint firstItem="ZpK-As-key" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="V9n-bU-uP7"/>
-                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="firstBaseline" secondItem="Zwm-MX-DZT" secondAttribute="firstBaseline" id="WUn-Y0-1u4"/>
-                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="firstBaseline" secondItem="Hq5-Va-sPO" secondAttribute="firstBaseline" id="YHw-4r-Qxo"/>
-                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="top" secondItem="4Uz-DE-7Te" secondAttribute="top" id="ZUv-i9-1yg"/>
-                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="baseline" secondItem="4Uz-DE-7Te" secondAttribute="baseline" id="grZ-my-OxW"/>
-                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="baseline" secondItem="4Uz-DE-7Te" secondAttribute="baseline" id="hCK-gH-IDo"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iYH-1P-Zg4"/>
-                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="leading" secondItem="4Uz-DE-7Te" secondAttribute="trailing" constant="7" id="jm4-yy-hRV"/>
-                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="firstBaseline" secondItem="Zwm-MX-DZT" secondAttribute="firstBaseline" id="owP-Cp-ndZ"/>
-                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="baseline" secondItem="Zwm-MX-DZT" secondAttribute="baseline" id="rBs-bW-DK4"/>
-                            <constraint firstItem="pkn-ox-zQT" firstAttribute="leading" secondItem="Hq5-Va-sPO" secondAttribute="trailing" constant="8" symbolic="YES" id="tzL-9A-xXN"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="trailing" secondItem="ZpK-As-key" secondAttribute="trailing" id="wxt-xo-qf5"/>
+                            <constraint firstItem="V68-dQ-HXh" firstAttribute="top" secondItem="MQt-XT-aan" secondAttribute="bottom" id="Auk-Ho-4V4"/>
+                            <constraint firstItem="48J-to-UIR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="CA3-qE-wxK"/>
+                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="firstBaseline" secondItem="Hq5-Va-sPO" secondAttribute="firstBaseline" id="DDa-zE-MX8"/>
+                            <constraint firstItem="X23-OF-hJp" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="EYB-u3-yI0"/>
+                            <constraint firstItem="X23-OF-hJp" firstAttribute="top" secondItem="V68-dQ-HXh" secondAttribute="top" id="EZv-JI-fNv"/>
+                            <constraint firstItem="V68-dQ-HXh" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="GnX-2k-7zl"/>
+                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="baseline" secondItem="4Uz-DE-7Te" secondAttribute="baseline" id="GqA-gG-AXs"/>
+                            <constraint firstAttribute="trailing" secondItem="MQt-XT-aan" secondAttribute="trailing" id="HFo-0j-8sV"/>
+                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="baseline" secondItem="Hq5-Va-sPO" secondAttribute="baseline" id="OSB-ou-gH1"/>
+                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="firstBaseline" secondItem="Zwm-MX-DZT" secondAttribute="firstBaseline" id="PuR-SL-Eln"/>
+                            <constraint firstItem="X23-OF-hJp" firstAttribute="leading" secondItem="V68-dQ-HXh" secondAttribute="leading" id="YqH-ys-3gB"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="centerX" secondItem="4Uz-DE-7Te" secondAttribute="centerX" id="ZwY-Nc-Rp3"/>
+                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="top" secondItem="4Uz-DE-7Te" secondAttribute="top" id="aM3-LR-Ere"/>
+                            <constraint firstItem="pkn-ox-zQT" firstAttribute="leading" secondItem="Hq5-Va-sPO" secondAttribute="trailing" constant="8" symbolic="YES" id="aPv-i1-SdY"/>
+                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="leading" secondItem="4Uz-DE-7Te" secondAttribute="trailing" constant="7" id="gLZ-16-qrK"/>
+                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="firstBaseline" secondItem="4Uz-DE-7Te" secondAttribute="firstBaseline" id="hjf-I1-d1x"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="iwC-cN-mj2"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="kgN-IB-12L"/>
+                            <constraint firstItem="X23-OF-hJp" firstAttribute="top" secondItem="Zwm-MX-DZT" secondAttribute="bottom" constant="8" symbolic="YES" id="nGr-0o-8yS"/>
+                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="top" secondItem="Hq5-Va-sPO" secondAttribute="top" id="oLd-vW-NWH"/>
+                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="baseline" secondItem="Zwm-MX-DZT" secondAttribute="baseline" id="oTa-lC-dpw"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="trailing" secondItem="V68-dQ-HXh" secondAttribute="trailing" id="q90-jc-V12"/>
+                            <constraint firstItem="V68-dQ-HXh" firstAttribute="trailing" secondItem="X23-OF-hJp" secondAttribute="trailing" id="rOR-hb-qV7"/>
+                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="leading" secondItem="Zwm-MX-DZT" secondAttribute="trailing" constant="8" symbolic="YES" id="vFH-bv-uU8"/>
+                            <constraint firstItem="48J-to-UIR" firstAttribute="leading" secondItem="pkn-ox-zQT" secondAttribute="trailing" constant="8" symbolic="YES" id="vJh-dH-oLF"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="X23-OF-hJp" secondAttribute="leading" id="wo0-Pn-HTp"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="centerY" secondItem="pkn-ox-zQT" secondAttribute="centerY" id="zsA-26-ebX"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="canvasView" destination="ZpK-As-key" id="hUZ-gq-WrB"/>
+                        <outlet property="canvasView" destination="V68-dQ-HXh" id="VFZ-9I-5O1"/>
+                        <outlet property="textView" destination="X23-OF-hJp" id="iEY-sg-NGf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -136,7 +156,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rGz-r4-cNs">
-                                <rect key="frame" x="0.0" y="64" width="1024" height="704"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="VpG-A4-xBH" customClass="TableCellTableViewCell" customModule="project" customModuleProvider="target">
@@ -174,10 +194,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="rGz-r4-cNs" secondAttribute="trailing" id="A8m-B0-O6h"/>
-                            <constraint firstItem="rGz-r4-cNs" firstAttribute="leading" secondItem="ztA-eH-ZCO" secondAttribute="leading" id="WKn-WM-l1C"/>
-                            <constraint firstItem="rGz-r4-cNs" firstAttribute="top" secondItem="P2G-5d-tiU" secondAttribute="bottom" id="efQ-Ao-Svx"/>
-                            <constraint firstItem="rGz-r4-cNs" firstAttribute="bottom" secondItem="tt6-RG-UqY" secondAttribute="top" id="wlF-MP-CyM"/>
+                            <constraint firstItem="rGz-r4-cNs" firstAttribute="bottom" secondItem="tt6-RG-UqY" secondAttribute="top" id="8gu-kX-RSb"/>
+                            <constraint firstItem="rGz-r4-cNs" firstAttribute="leading" secondItem="ztA-eH-ZCO" secondAttribute="leading" id="C1Y-a9-BYO"/>
+                            <constraint firstItem="rGz-r4-cNs" firstAttribute="top" secondItem="ztA-eH-ZCO" secondAttribute="top" id="cnb-Ou-bom"/>
+                            <constraint firstAttribute="trailing" secondItem="rGz-r4-cNs" secondAttribute="trailing" id="ol8-zr-XS5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Notes" id="Rjf-G3-9yv">

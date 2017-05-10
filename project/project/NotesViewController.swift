@@ -10,8 +10,10 @@ import UIKit
 import Foundation
 //import RealmSwift
 
+
 class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    let notes = [Notes]()
     @IBOutlet weak var tableView: UITableView!
     @IBAction func addNote(_ sender: UIBarButtonItem) {
         
@@ -21,8 +23,7 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.performSegue(withIdentifier: "viewNoteSegue", sender: nil)
     }
     
-    let notes = Notes()
-    var data: [String] = ["Note1"]
+    var data: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,7 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //return self.notes.count
         return self.data.count
     }
 
@@ -41,6 +43,7 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as! TableCellTableViewCell
         
         let note = data[indexPath.row]
+        //let note = notes[indexPath.row]
         cell.noteName.text = note
         
         return cell
@@ -64,24 +67,7 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //
 //            self.tableView.deselectRow(at: indexPath, animated: true)
 //        }
-//    }
-    
-//    func addNote(){
-//        data.append("note\(self.data.count + 1)")
-//        let indexPath: IndexPath = IndexPath(row: (self.data.count - 1), section: 0)
-//        tableView.insertRows(at: [indexPath], with: .automatic)
-//        self.performSegue(withIdentifier: "viewNoteSegue", sender: self)
-//        
-//    }
-    
-    func save(){
-        //save data to directory
-    }
-    
-    func loadData() {
-        //load data from directory
-    }
-    
+//    }    
 
 
     override func didReceiveMemoryWarning() {

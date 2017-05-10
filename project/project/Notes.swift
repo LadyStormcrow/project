@@ -11,9 +11,26 @@ import Foundation
 //import RealmSwift
 
 class Notes: NSObject {
-    dynamic var name = ""
-    dynamic var dateCreated = NSDate()
-    dynamic var dateModified = NSDate()
-    dynamic var noteId = 0
+    var name: String?
+    var dateCreated: NSDate?
+    var dateModified: NSDate?
+    var directoryPath: String?
+    var noteId: Int?
+    
+    init(noteName: String, dateC: NSDate, dateMod: NSDate, directory: String, id: Int) {
+        self.name = noteName
+        self.dateCreated = dateC
+        self.dateModified = dateMod
+        self.directoryPath = directory
+        self.noteId = id
+    }
+    
+    func save() {
+        
+    }
+    
+    func load(){
+        
+    }
 
 }
