@@ -20,14 +20,12 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.insertRows(at: [indexPath], with: .automatic)
         self.performSegue(withIdentifier: "viewNoteSegue", sender: nil)
     }
-
     
     let notes = Notes()
     var data: [String] = ["Note1"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         
     }
     
@@ -42,7 +40,8 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as! TableCellTableViewCell
         
-        cell.noteName.text = notes.name
+        let note = data[indexPath.row]
+        cell.noteName.text = note
         
         return cell
         
