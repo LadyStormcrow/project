@@ -8,20 +8,35 @@
 
 import UIKit
 import Foundation
-import RealmSwift
+//import RealmSwift
 
 class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBAction func addNote(_ sender: UIBarButtonItem) {
+        
+        data.append("note\(self.data.count + 1)")
+        let indexPath: IndexPath = IndexPath(row: (self.data.count - 1), section: 0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
+        self.performSegue(withIdentifier: "viewNoteSegue", sender: nil)
+    }
+
+    
     let notes = Notes()
-    var table: [String] = ["Note1"]
+    var data: [String] = ["Note1"]
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        
+    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.table.count
+        return self.data.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -36,14 +51,39 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt
         indexPath: IndexPath){
-        //self.performSegue(withIdentifier:"viewMonsterFromSearchSegue", sender: self)
+        self.performSegue(withIdentifier:"viewNoteSegue", sender: self)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//        if (segue.identifier == "viewNoteSegue") //if an item is clicked in list
+//        {
+//            let upcoming: ViewController = segue.destination
+//                as! ViewController
+//            let indexPath = self.tableView.indexPathForSelectedRow!
+//            //show saved Note
+//
+//            self.tableView.deselectRow(at: indexPath, animated: true)
+//        }
+//    }
+    
+//    func addNote(){
+//        data.append("note\(self.data.count + 1)")
+//        let indexPath: IndexPath = IndexPath(row: (self.data.count - 1), section: 0)
+//        tableView.insertRows(at: [indexPath], with: .automatic)
+//        self.performSegue(withIdentifier: "viewNoteSegue", sender: self)
+//        
+//    }
+    
+    func save(){
+        //save data to directory
     }
+    
+    func loadData() {
+        //load data from directory
+    }
+    
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

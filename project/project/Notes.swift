@@ -8,7 +8,7 @@
 
 import UIKit
 import Foundation
-import RealmSwift
+//import RealmSwift
 
 class Notes: NSObject {
     dynamic var name = ""

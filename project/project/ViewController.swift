@@ -14,7 +14,20 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var canvasView: CanvasView!
     
+//    func createTextField() {
+//        let frame = CGRect(x: 0, y: 108.0, width: 1024.0, height: 660.0)
+//        let textView = UITextField(frame: frame)
+//        canvasView.addSubview(textView)
+//    }
+
+    
+    @IBAction func textButton() {
+        
+    
+    }
+    
     @IBAction func btnPushButton(button: ColourButton) {
+        
         if button.isBlueButton {
             canvasView.drawColor = UIColor(red: 0.1215686275, green: 0.5921568627, blue: 1.0, alpha: 1.0)
         } else if button.isBlackButton {
@@ -25,10 +38,13 @@ class ViewController: UIViewController {
             canvasView.drawColor = UIColor.white
         }
     }
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         //canvasView.clearCanvas(animated:false)
+        
     }
     
     // Shake to clear screen
