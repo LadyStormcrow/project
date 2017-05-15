@@ -39,8 +39,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView.isHidden = true
+        textView!.isHidden = true
         //canvasView.clearCanvas(animated:false)
+        //canvasView.addSubview(textView)
+        //print(canvasView.subviews)
         
     }
     

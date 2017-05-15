@@ -8,22 +8,22 @@
 
 import UIKit
 import Foundation
-//import RealmSwift
+import RealmSwift
 
-class Notes: NSObject {
-    var name: String?
-    var dateCreated: NSDate?
-    var dateModified: NSDate?
-    var directoryPath: String?
-    var noteId: Int?
+class Notes: Object {
+    dynamic var name: String = ""
+//    dynamic var dateCreated: NSDate?
+//    dynamic var dateModified: NSDate?
+//    dynamic var directoryPath: String?
+//    dynamic var noteId: Int
     
-    init(noteName: String, dateC: NSDate, dateMod: NSDate, directory: String, id: Int) {
-        self.name = noteName
-        self.dateCreated = dateC
-        self.dateModified = dateMod
-        self.directoryPath = directory
-        self.noteId = id
-    }
+//    init(noteName: String, dateC: NSDate, dateMod: NSDate, directory: String, id: Int) {
+//        self.name = noteName
+//        self.dateCreated = dateC
+//        self.dateModified = dateMod
+//        self.directoryPath = directory
+//        self.noteId = id
+//    }
     
     func save() {
         

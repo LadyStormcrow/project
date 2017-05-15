@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		62F68115C3F07D583EF68937 /* Pods_projectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C60B72A90C3C438242276DD /* Pods_projectUITests.framework */; };
 		733D189137AB4A4495885954 /* Pods_projectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BBEB4FF7C7132F31C00C95 /* Pods_projectTests.framework */; };
+		A34E29A11EC975DA00D10C63 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34E29A01EC975DA00D10C63 /* Note.swift */; };
 		A354331B1EB970DA00FC83A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354331A1EB970DA00FC83A7 /* AppDelegate.swift */; };
 		A354331D1EB970DA00FC83A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354331C1EB970DA00FC83A7 /* ViewController.swift */; };
 		A35433201EB970DA00FC83A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A354331E1EB970DA00FC83A7 /* Main.storyboard */; };
@@ -20,7 +21,7 @@
 		A354334F1EBAF8BC00FC83A7 /* ColourButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354334E1EBAF8BC00FC83A7 /* ColourButton.swift */; };
 		A35433511EBDA2E900FC83A7 /* TableCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35433501EBDA2E900FC83A7 /* TableCellTableViewCell.swift */; };
 		A35433531EBDA3FA00FC83A7 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35433521EBDA3FA00FC83A7 /* NotesViewController.swift */; };
-		A35433551EBDA73C00FC83A7 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35433541EBDA73C00FC83A7 /* Notes.swift */; };
+		A364A1AC1EC441D2006F1D63 /* ScrollCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = A364A1AB1EC441D2006F1D63 /* ScrollCanvas.swift */; };
 		D780F1C2288E652E417F5E6C /* Pods_project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C44E0A34D477A4F3F14C11 /* Pods_project.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		7C60B72A90C3C438242276DD /* Pods_projectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_projectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F2563BDCF910E0BBD468D0 /* Pods-project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-project/Pods-project.debug.xcconfig"; sourceTree = "<group>"; };
 		8638812B5573D3BB51BB31DA /* Pods-project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-project.release.xcconfig"; path = "Pods/Target Support Files/Pods-project/Pods-project.release.xcconfig"; sourceTree = "<group>"; };
+		A34E29A01EC975DA00D10C63 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		A35433171EB970DA00FC83A7 /* project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A354331A1EB970DA00FC83A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A354331C1EB970DA00FC83A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -65,7 +67,7 @@
 		A354334E1EBAF8BC00FC83A7 /* ColourButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColourButton.swift; sourceTree = "<group>"; };
 		A35433501EBDA2E900FC83A7 /* TableCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellTableViewCell.swift; sourceTree = "<group>"; };
 		A35433521EBDA3FA00FC83A7 /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
-		A35433541EBDA73C00FC83A7 /* Notes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
+		A364A1AB1EC441D2006F1D63 /* ScrollCanvas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollCanvas.swift; sourceTree = "<group>"; };
 		BFB343EF68C577DEB0502A6F /* Pods-projectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-projectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-projectUITests/Pods-projectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7B6014097F18F08696A88BB /* Pods-projectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-projectTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-projectTests/Pods-projectTests.release.xcconfig"; sourceTree = "<group>"; };
 		DAA1FFF172C5F05730860ABF /* Pods-projectUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-projectUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-projectUITests/Pods-projectUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,8 +129,9 @@
 				A354331A1EB970DA00FC83A7 /* AppDelegate.swift */,
 				A354331C1EB970DA00FC83A7 /* ViewController.swift */,
 				A35433481EB971C700FC83A7 /* CanvasView.swift */,
+				A364A1AB1EC441D2006F1D63 /* ScrollCanvas.swift */,
 				A354331E1EB970DA00FC83A7 /* Main.storyboard */,
-				A35433541EBDA73C00FC83A7 /* Notes.swift */,
+				A34E29A01EC975DA00D10C63 /* Note.swift */,
 				A35433501EBDA2E900FC83A7 /* TableCellTableViewCell.swift */,
 				A35433521EBDA3FA00FC83A7 /* NotesViewController.swift */,
 				A354334E1EBAF8BC00FC83A7 /* ColourButton.swift */,
@@ -462,10 +465,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A364A1AC1EC441D2006F1D63 /* ScrollCanvas.swift in Sources */,
 				A354331D1EB970DA00FC83A7 /* ViewController.swift in Sources */,
-				A35433551EBDA73C00FC83A7 /* Notes.swift in Sources */,
 				A354334F1EBAF8BC00FC83A7 /* ColourButton.swift in Sources */,
 				A35433531EBDA3FA00FC83A7 /* NotesViewController.swift in Sources */,
+				A34E29A11EC975DA00D10C63 /* Note.swift in Sources */,
 				A35433511EBDA2E900FC83A7 /* TableCellTableViewCell.swift in Sources */,
 				A354331B1EB970DA00FC83A7 /* AppDelegate.swift in Sources */,
 				A35433491EB971C700FC83A7 /* CanvasView.swift in Sources */,

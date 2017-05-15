@@ -8,25 +8,49 @@
 
 import UIKit
 import Foundation
-//import RealmSwift
-
+import RealmSwift
 
 class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    let notes = [Notes]()
+    let realm = try! Realm() //NEED TO CATCH EXCEPTION HERE!!
+    var data: Results<Note> = try! Realm().objects(Note.self)
+    
+    convenience init() {
+        self.init()
+        data = realm.objects(Note.self)
+    }
+
+
     @IBOutlet weak var tableView: UITableView!
     @IBAction func addNote(_ sender: UIBarButtonItem) {
         
-        data.append("note\(self.data.count + 1)")
-        let indexPath: IndexPath = IndexPath(row: (self.data.count - 1), section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
-        self.performSegue(withIdentifier: "viewNoteSegue", sender: nil)
+//        data.append("note\(self.data.count + 1)")
+//        let indexPath: IndexPath = IndexPath(row: (self.data.count - 1), section: 0)
+//        tableView.insertRows(at: [indexPath], with: .automatic)
+//        self.performSegue(withIdentifier: "viewNoteSegue", sender: nil)
     }
     
-    var data: [String] = []
+    func loadDefaultNotes() {
+        if data.count == 0 {
+            
+            try! realm.write() {
+                let defaultData = ["Note1", "Note2", "Note3"]
+                
+                for d in defaultData {
+                    let newNotes = Note()
+                    newNotes.name = d
+                    self.realm.add(newNotes)
+                }
+            }
+            
+            data = realm.objects(Note.self)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadDefaultNotes()
         
     }
     
@@ -35,7 +59,6 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return self.notes.count
         return self.data.count
     }
 
@@ -43,8 +66,7 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath) as! TableCellTableViewCell
         
         let note = data[indexPath.row]
-        //let note = notes[indexPath.row]
-        cell.noteName.text = note
+        cell.noteName.text = note.name
         
         return cell
         
@@ -53,8 +75,10 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt
         indexPath: IndexPath){
-        self.performSegue(withIdentifier:"viewNoteSegue", sender: self)
+        //self.performSegue(withIdentifier:"viewNoteSegue", sender: self)
     }
+    
+    
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        
@@ -75,15 +99,5 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

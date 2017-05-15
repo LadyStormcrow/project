@@ -19,7 +19,6 @@ class CanvasView: UIImageView {
     
     private let forceSensitivity: CGFloat = 4.0
     
-    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         
@@ -93,4 +92,5 @@ class CanvasView: UIImageView {
             image = nil
         }
     }
+    
 }
