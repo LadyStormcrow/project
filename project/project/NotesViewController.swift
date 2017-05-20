@@ -13,44 +13,58 @@ import RealmSwift
 class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let realm = try! Realm() //NEED TO CATCH EXCEPTION HERE!!
-    var data: Results<Note> = try! Realm().objects(Note.self)
+    var data: Results<NoteObject>!
+
     
     convenience init() {
         self.init()
-        data = realm.objects(Note.self)
+        data = realm.objects(NoteObject.self)
     }
-
 
     @IBOutlet weak var tableView: UITableView!
+    
+    
     @IBAction func addNote(_ sender: UIBarButtonItem) {
         
-//        data.append("note\(self.data.count + 1)")
-//        let indexPath: IndexPath = IndexPath(row: (self.data.count - 1), section: 0)
-//        tableView.insertRows(at: [indexPath], with: .automatic)
-//        self.performSegue(withIdentifier: "viewNoteSegue", sender: nil)
-    }
-    
-    func loadDefaultNotes() {
-        if data.count == 0 {
-            
-            try! realm.write() {
-                let defaultData = ["Note1", "Note2", "Note3"]
-                
-                for d in defaultData {
-                    let newNotes = Note()
-                    newNotes.name = d
-                    self.realm.add(newNotes)
+        let nameAlertController = UIAlertController(title: "Name note", message: "Please name your note", preferredStyle: .alert)
+        
+        let noteAction = UIAlertAction(title: "Add", style: .default) { [weak nameAlertController] _ in
+            if let nameAlertController = nameAlertController {
+                let noteNameTextField = nameAlertController.textFields![0] as UITextField
+                //save Note to database
+                let newNote = NoteObject()
+                newNote.name = noteNameTextField.text!
+                newNote.created = NSDate()
+                try! self.realm.write() {
+                    self.realm.add(newNote)
                 }
             }
-            
-            data = realm.objects(Note.self)
+            self.performSegue(withIdentifier: "viewNoteSegue", sender: nil)
         }
+        
+        noteAction.isEnabled = false
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        
+        nameAlertController.addTextField { textField in
+            textField.placeholder = "Note name"
+            
+            NotificationCenter.default.addObserver(forName: NSNotification.Name.UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { notification in
+                noteAction.isEnabled = textField.text != ""
+            }
+        }
+        
+        nameAlertController.addAction(noteAction)
+        nameAlertController.addAction(cancelAction)
+        
+        self.present(nameAlertController, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadDefaultNotes()
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        data = try! realm.objects(NoteObject.self)
         
     }
     
@@ -75,23 +89,25 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt
         indexPath: IndexPath){
-        //self.performSegue(withIdentifier:"viewNoteSegue", sender: self)
+        
+        self.performSegue(withIdentifier:"viewNoteSegue", sender: self)
     }
     
     
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//    func prepare(for segue: UIStoryboardSegue, sender: TableCellTableViewCell) {
 //        
-//        if (segue.identifier == "viewNoteSegue") //if an item is clicked in list
-//        {
+//        if (segue.identifier == "viewNoteSegue") { //if an item is clicked in list
 //            let upcoming: ViewController = segue.destination
 //                as! ViewController
 //            let indexPath = self.tableView.indexPathForSelectedRow!
 //            //show saved Note
+//            
 //
 //            self.tableView.deselectRow(at: indexPath, animated: true)
 //        }
-//    }    
+//    }
+    
 
 
     override func didReceiveMemoryWarning() {

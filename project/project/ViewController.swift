@@ -13,17 +13,17 @@ class ViewController: UIViewController {
     
     
     @IBOutlet weak var canvasView: CanvasView!
-
-    @IBOutlet weak var textView: UITextView!
     
     
     @IBAction func textButton() {
-        textView.isHidden = false
+        
     }
     
-    @IBAction func btnPushButton(button: ColourButton) {
-        textView.isHidden = true
-        
+    @IBAction func saveButton() {
+    }
+    
+    
+    @IBAction func btnPushButton(button: ColourButton) {        
         if button.isBlueButton {
             canvasView.drawColor = UIColor(red: 0.1215686275, green: 0.5921568627, blue: 1.0, alpha: 1.0)
         } else if button.isBlackButton {
@@ -35,11 +35,31 @@ class ViewController: UIViewController {
         }
     }
     
+//    func saveNote() {
+//        UIGraphicsBeginImageContextWithOptions(canvasView.bounds.size, false, 0.0)
+//        canvasView.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+//        let image = UIGraphicsGetImageFromCurrentImageContext();
+//        UIGraphicsEndImageContext();
+//        let data = UIImagePNGRepresentation(image!)
+//        do {
+//            let documentsURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+//            let fileURL = documentsURL.appendingPathComponent("test.png")
+//            
+//            try data?.write(to: fileURL, options: .atomic)
+//        } catch {
+//            print(error)
+//        }
+//    }
+//    
+//    func loadNote() {
+//        let documentsURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+//        let fileURL = documentsURL.appendingPathComponent("test.png").path
+//        let image = UIImage(contentsOfFile: fileURL)
+//    }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textView!.isHidden = true
         //canvasView.clearCanvas(animated:false)
         //canvasView.addSubview(textView)
         //print(canvasView.subviews)
