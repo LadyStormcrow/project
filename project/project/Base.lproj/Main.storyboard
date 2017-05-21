@@ -119,17 +119,17 @@
                             <constraint firstItem="4Uz-DE-7Te" firstAttribute="firstBaseline" secondItem="Zwm-MX-DZT" secondAttribute="firstBaseline" id="Dvq-9K-phy"/>
                             <constraint firstItem="MQt-XT-aan" firstAttribute="centerY" secondItem="pkn-ox-zQT" secondAttribute="centerY" id="Fmy-Rf-c4V"/>
                             <constraint firstItem="48J-to-UIR" firstAttribute="baseline" secondItem="R1s-EO-aFx" secondAttribute="baseline" id="HgL-3r-4iB"/>
-                            <constraint firstItem="48J-to-UIR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Idx-vB-C2Q"/>
+                            <constraint firstItem="48J-to-UIR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="I8F-1f-pqe"/>
                             <constraint firstItem="Zwm-MX-DZT" firstAttribute="baseline" secondItem="4Uz-DE-7Te" secondAttribute="baseline" id="PQg-U0-6Oy"/>
                             <constraint firstItem="48J-to-UIR" firstAttribute="leading" secondItem="pkn-ox-zQT" secondAttribute="trailing" constant="8" symbolic="YES" id="QCW-Om-zAI"/>
+                            <constraint firstItem="5Hq-qI-gG2" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Taw-c3-eey"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="VdB-LY-AVD"/>
                             <constraint firstItem="MQt-XT-aan" firstAttribute="centerX" secondItem="4Uz-DE-7Te" secondAttribute="centerX" id="Yx9-2Y-VSr"/>
                             <constraint firstItem="4Uz-DE-7Te" firstAttribute="leading" secondItem="Zwm-MX-DZT" secondAttribute="trailing" constant="8" symbolic="YES" id="ZWd-zU-3Ib"/>
                             <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="bcP-hU-BjX"/>
                             <constraint firstItem="Hq5-Va-sPO" firstAttribute="firstBaseline" secondItem="Zwm-MX-DZT" secondAttribute="firstBaseline" id="eAF-aj-nj7"/>
-                            <constraint firstItem="5Hq-qI-gG2" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="fJV-n1-qrn"/>
                             <constraint firstItem="Hq5-Va-sPO" firstAttribute="leading" secondItem="4Uz-DE-7Te" secondAttribute="trailing" constant="7" id="hJc-JF-pJ9"/>
                             <constraint firstItem="4Uz-DE-7Te" firstAttribute="baseline" secondItem="Hq5-Va-sPO" secondAttribute="baseline" id="kDU-Ay-bsc"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="mxE-cJ-AbR"/>
                             <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="5Hq-qI-gG2" secondAttribute="leading" id="vbf-XA-r4S"/>
                             <constraint firstItem="5Hq-qI-gG2" firstAttribute="top" secondItem="MQt-XT-aan" secondAttribute="bottom" id="wip-Pr-V1t"/>
                             <constraint firstAttribute="trailing" secondItem="MQt-XT-aan" secondAttribute="trailing" id="ws2-Ru-m4q"/>
@@ -142,7 +142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1586.1328125" y="137.5"/>
+            <point key="canvasLocation" x="2658" y="893"/>
         </scene>
         <!--Note-->
         <scene sceneID="nJx-ee-5Wb">
@@ -211,6 +211,7 @@
                     <connections>
                         <outlet property="tableView" destination="rGz-r4-cNs" id="oLo-Vc-ic3"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="viewNoteSegue" id="YnT-lo-Aad"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="loadNoteSegue" id="m7h-xv-TrP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xjJ-vL-e43" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -236,4 +237,7 @@
             <point key="canvasLocation" x="1203.515625" y="892.96875"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="YnT-lo-Aad"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -9,6 +9,8 @@
 import UIKit
 
 class TableCellTableViewCell: UITableViewCell {
+    
+    var noteId: String?
 
     @IBOutlet weak var noteName: UILabel!
     override func awakeFromNib() {
@@ -22,4 +24,7 @@ class TableCellTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func configureWithNote(_ note: NoteObject){
+        noteId = note.noteId
+    }
 }
