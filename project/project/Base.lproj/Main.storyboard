@@ -164,13 +164,13 @@
                                         <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VpG-A4-xBH" id="Qhj-Ua-UOK">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NoteNameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVa-6g-EfY">
-                                                    <rect key="frame" x="8" y="14" width="153" height="21"/>
+                                                    <rect key="frame" x="8" y="14" width="705" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="153" id="tPv-VB-ZBp"/>
+                                                        <constraint firstAttribute="width" constant="705" id="4fO-pg-nx9"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -178,8 +178,8 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="cVa-6g-EfY" firstAttribute="bottom" secondItem="Qhj-Ua-UOK" secondAttribute="bottomMargin" id="FTU-ba-upF"/>
-                                                <constraint firstItem="cVa-6g-EfY" firstAttribute="leading" secondItem="Qhj-Ua-UOK" secondAttribute="leadingMargin" id="cJB-V9-LPd"/>
+                                                <constraint firstItem="cVa-6g-EfY" firstAttribute="leading" secondItem="Qhj-Ua-UOK" secondAttribute="leadingMargin" id="BdD-gS-pjj"/>
+                                                <constraint firstItem="cVa-6g-EfY" firstAttribute="bottom" secondItem="Qhj-Ua-UOK" secondAttribute="bottomMargin" id="oEZ-Aq-bWD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

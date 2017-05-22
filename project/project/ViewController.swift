@@ -42,7 +42,7 @@ class ViewController: UIViewController {
         
         let currentDate = NSDate()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMMM dd, yyyy"
+        dateFormatter.dateFormat = "EEEE, MMMM dd, yyyy, HH:mm:ssZZZZZ"
         let convertedDate = dateFormatter.string(from: currentDate as Date)
         let newNote = NoteObject()
         newNote.name = convertedDate
@@ -91,29 +91,6 @@ class ViewController: UIViewController {
         }
     }
     
-//    func saveNote(noteName: String) {
-//        
-//        UIGraphicsBeginImageContextWithOptions(canvasView.bounds.size, false, 0.0)
-//        canvasView.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
-//        let image = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-//        
-//        let imageData = UIImagePNGRepresentation(image!)
-//        
-//        do {
-//            let documentsURL = try FileManager.default.url(
-//                for: .documentDirectory,
-//                in: .userDomainMask,
-//                appropriateFor: nil,
-//                create: false)
-//            let fileURL = documentsURL.appendingPathComponent("\(noteName)").appendingPathExtension("png")
-//            
-//            try imageData?.write(to: fileURL, options: .atomic)
-//            
-//        } catch {
-//            print(error)
-//        }
-//    }
     
     func loadNote(fileURL: String) -> UIImage {
         let documentsURL = try! FileManager.default.url(

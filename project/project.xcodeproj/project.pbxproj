@@ -21,6 +21,7 @@
 		A354334F1EBAF8BC00FC83A7 /* ColourButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354334E1EBAF8BC00FC83A7 /* ColourButton.swift */; };
 		A35433511EBDA2E900FC83A7 /* TableCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35433501EBDA2E900FC83A7 /* TableCellTableViewCell.swift */; };
 		A35433531EBDA3FA00FC83A7 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35433521EBDA3FA00FC83A7 /* NotesViewController.swift */; };
+		A36214781ED275BE006D22D6 /* Notebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36214771ED275BE006D22D6 /* Notebook.swift */; };
 		A364A1AC1EC441D2006F1D63 /* ScrollCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = A364A1AB1EC441D2006F1D63 /* ScrollCanvas.swift */; };
 		D780F1C2288E652E417F5E6C /* Pods_project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29C44E0A34D477A4F3F14C11 /* Pods_project.framework */; };
 /* End PBXBuildFile section */
@@ -67,6 +68,7 @@
 		A354334E1EBAF8BC00FC83A7 /* ColourButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColourButton.swift; sourceTree = "<group>"; };
 		A35433501EBDA2E900FC83A7 /* TableCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellTableViewCell.swift; sourceTree = "<group>"; };
 		A35433521EBDA3FA00FC83A7 /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		A36214771ED275BE006D22D6 /* Notebook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notebook.swift; sourceTree = "<group>"; };
 		A364A1AB1EC441D2006F1D63 /* ScrollCanvas.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollCanvas.swift; sourceTree = "<group>"; };
 		BFB343EF68C577DEB0502A6F /* Pods-projectUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-projectUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-projectUITests/Pods-projectUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		D7B6014097F18F08696A88BB /* Pods-projectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-projectTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-projectTests/Pods-projectTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				A35433481EB971C700FC83A7 /* CanvasView.swift */,
 				A364A1AB1EC441D2006F1D63 /* ScrollCanvas.swift */,
 				A354331E1EB970DA00FC83A7 /* Main.storyboard */,
+				A36214771ED275BE006D22D6 /* Notebook.swift */,
 				A34AAFF91ED03C1000F07F13 /* NoteObject.swift */,
 				A35433501EBDA2E900FC83A7 /* TableCellTableViewCell.swift */,
 				A354331C1EB970DA00FC83A7 /* ViewController.swift */,
@@ -469,6 +472,7 @@
 				A354331D1EB970DA00FC83A7 /* ViewController.swift in Sources */,
 				A34AAFFA1ED03C1000F07F13 /* NoteObject.swift in Sources */,
 				A354334F1EBAF8BC00FC83A7 /* ColourButton.swift in Sources */,
+				A36214781ED275BE006D22D6 /* Notebook.swift in Sources */,
 				A35433531EBDA3FA00FC83A7 /* NotesViewController.swift in Sources */,
 				A35433511EBDA2E900FC83A7 /* TableCellTableViewCell.swift in Sources */,
 				A354331B1EB970DA00FC83A7 /* AppDelegate.swift in Sources */,

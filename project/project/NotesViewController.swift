@@ -26,8 +26,13 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         
         let realm = try! Realm() //NEED TO CATCH EXCEPTION HERE!!
-        data = try! realm.objects(NoteObject.self)
+        data = realm.objects(NoteObject.self)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -54,6 +59,24 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.performSegue(withIdentifier:"loadNoteSegue", sender: self)
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let documentsURL = try! FileManager.default.url(
+            for: .documentDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false)
+        
+        if editingStyle == .delete {
+            try! data.realm!.write {
+                let note = self.data[indexPath.row]
+                let fileURL = note.directoryPath
+                let filePath = documentsURL.appendingPathComponent(fileURL)
+                try! FileManager.default.removeItem(at: filePath)
+                self.data.realm!.delete(note)
+            }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
