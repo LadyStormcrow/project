@@ -10,13 +10,13 @@ import UIKit
 import Foundation
 import RealmSwift
 
-class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     
     var data: Results<NoteObject>!
 
     @IBOutlet weak var tableView: UITableView!
-    
     
     @IBAction func addNote(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "viewNoteSegue", sender: self)
@@ -27,7 +27,6 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let realm = try! Realm() //NEED TO CATCH EXCEPTION HERE!!
         data = realm.objects(NoteObject.self)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +45,7 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! TableCellTableViewCell
         let note = data[indexPath.row]
+        //cell.initalView()
         cell.configureWithNote(note)
         cell.noteName.text = note.name
         

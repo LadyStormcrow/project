@@ -6,8 +6,11 @@
 //  Copyright © 2017 nstho4. All rights reserved.
 //
 
-import UIKit
-
-class Notebook: Object {
-
-}
+//import UIKit
+//import RealmSwift
+//
+//class Notebook: Object {
+//
+//    dynamic var name = ""
+//    dynamic var created = NSDate()
+//}

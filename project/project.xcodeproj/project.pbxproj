@@ -131,12 +131,9 @@
 				A354331A1EB970DA00FC83A7 /* AppDelegate.swift */,
 				A35433481EB971C700FC83A7 /* CanvasView.swift */,
 				A364A1AB1EC441D2006F1D63 /* ScrollCanvas.swift */,
+				A3A28E821ED5210200B2BBA3 /* View Controllers */,
 				A354331E1EB970DA00FC83A7 /* Main.storyboard */,
-				A36214771ED275BE006D22D6 /* Notebook.swift */,
-				A34AAFF91ED03C1000F07F13 /* NoteObject.swift */,
-				A35433501EBDA2E900FC83A7 /* TableCellTableViewCell.swift */,
-				A354331C1EB970DA00FC83A7 /* ViewController.swift */,
-				A35433521EBDA3FA00FC83A7 /* NotesViewController.swift */,
+				A3A28E811ED520DC00B2BBA3 /* Models */,
 				A354334E1EBAF8BC00FC83A7 /* ColourButton.swift */,
 				A35433211EB970DA00FC83A7 /* Assets.xcassets */,
 				A35433231EB970DA00FC83A7 /* LaunchScreen.storyboard */,
@@ -161,6 +158,25 @@
 				A354333C1EB970DA00FC83A7 /* Info.plist */,
 			);
 			path = projectUITests;
+			sourceTree = "<group>";
+		};
+		A3A28E811ED520DC00B2BBA3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A36214771ED275BE006D22D6 /* Notebook.swift */,
+				A34AAFF91ED03C1000F07F13 /* NoteObject.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A3A28E821ED5210200B2BBA3 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A354331C1EB970DA00FC83A7 /* ViewController.swift */,
+				A35433501EBDA2E900FC83A7 /* TableCellTableViewCell.swift */,
+				A35433521EBDA3FA00FC83A7 /* NotesViewController.swift */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		B2EC6D89FB87DE2EF9172B8A /* Pods */ = {

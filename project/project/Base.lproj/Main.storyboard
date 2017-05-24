@@ -142,7 +142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2658" y="893"/>
+            <point key="canvasLocation" x="3351" y="892"/>
         </scene>
         <!--Note-->
         <scene sceneID="nJx-ee-5Wb">
@@ -164,7 +164,7 @@
                                         <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VpG-A4-xBH" id="Qhj-Ua-UOK">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NoteNameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVa-6g-EfY">
@@ -176,6 +176,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sLS-e0-fyY">
+                                                    <rect key="frame" x="8" y="6" width="227" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="cVa-6g-EfY" firstAttribute="leading" secondItem="Qhj-Ua-UOK" secondAttribute="leadingMargin" id="BdD-gS-pjj"/>
@@ -183,6 +190,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="changeNameField" destination="sLS-e0-fyY" id="wnT-8A-Vv1"/>
                                             <outlet property="noteName" destination="cVa-6g-EfY" id="7NW-A0-llo"/>
                                         </connections>
                                     </tableViewCell>
@@ -216,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xjJ-vL-e43" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1927.7343749999998" y="892.96875"/>
+            <point key="canvasLocation" x="1927" y="892"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7EN-i6-Vh6">
@@ -234,7 +242,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NZN-IJ-o1H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1203.515625" y="892.96875"/>
+            <point key="canvasLocation" x="654" y="893"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

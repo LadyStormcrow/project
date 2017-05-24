@@ -21,17 +21,6 @@ class ColourButton: UIButton {
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath(ovalIn: rect)
         
-        if (isBlueButton) {
-            
-        }
-        
-        if (isBlackButton) {
-            
-        }
-        
-        if (isRedButton) {
-            
-        }
         
         if (eraser) {
             fillColor = UIColor.white
