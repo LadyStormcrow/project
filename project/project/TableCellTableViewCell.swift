@@ -16,8 +16,8 @@ class TableCellTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var noteName: UILabel!
     @IBOutlet weak var changeNameField: UITextField!
     
+    var cellNote: NoteObject! = nil
     let realm = try! Realm()
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,12 +51,24 @@ class TableCellTableViewCell: UITableViewCell, UITextFieldDelegate {
         
     }
     
-    func textFieldShouldReturn(_ textField: UITextField, note: NoteObject) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         changeNameField.isHidden = true
         noteName.isHidden = false
         noteName.text = changeNameField.text
-        note.name = noteName.text!
+        let documentsURL = try! FileManager.default.url(
+            for: .documentDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false)
+        let fileURL = documentsURL.appendingPathComponent("\(cellNote.name)").appendingPathExtension("png")
+        try! FileManager.default.moveItem(at: fileURL, to: documentsURL.appendingPathComponent("\(noteName.text!)").appendingPathExtension("png"))
+        try! realm.write {
+            cellNote.name = noteName.text!
+            cellNote.directoryPath = "\(noteName.text!).png"
+        }
+
+
         return true
     }
 }

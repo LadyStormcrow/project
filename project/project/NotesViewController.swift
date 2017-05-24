@@ -45,7 +45,7 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! TableCellTableViewCell
         let note = data[indexPath.row]
-        //cell.initalView()
+        cell.cellNote = note
         cell.configureWithNote(note)
         cell.noteName.text = note.name
         
