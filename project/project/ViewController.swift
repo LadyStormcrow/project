@@ -16,9 +16,12 @@ class ViewController: UIViewController {
     var data: Results<NoteObject>!
     var isNewItem: Bool?
     var selectedNote: NoteObject?
+    var scroll: UIScrollView!
+    var canvasView: CanvasView!
+    var pageFinish: CGFloat!
     
     
-    @IBOutlet weak var canvasView: CanvasView!
+    //@IBOutlet weak var canvasView: CanvasView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +29,18 @@ class ViewController: UIViewController {
         data = self.realm.objects(NoteObject.self)
         //var pageSize = self.canvasView.frame.height
         
-        var canvasView: CanvasView = CanvasView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.width))
+        canvasView = CanvasView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.width))
         canvasView.isUserInteractionEnabled = true
-        
-        var scroll = UIScrollView(frame: view.bounds)
+        pageFinish = canvasView.frame.size.height
+
+        print(canvasView.bounds)
+        scroll = UIScrollView(frame: CGRect(x: 0.0, y: 108.0, width: view.frame.size.width, height: view.frame.size.height))
 //        scroll.isPagingEnabled = true
         scroll.contentSize = canvasView.bounds.size
         scroll.isUserInteractionEnabled = true
         scroll.isExclusiveTouch = true
-        scroll.canCancelContentTouches = true
         scroll.isPagingEnabled = true
+        
         view.addSubview(scroll)
         scroll.addSubview(canvasView)
         
@@ -44,21 +49,20 @@ class ViewController: UIViewController {
             let myImage = loadNote(fileURL: selectedNote!.directoryPath)
             canvasView.image = myImage
         }
-        
-        
-
-        
-//        scroll.contentSize = CGSizeMake(self.view.frame.size.width * numberOfViews, self.view.frame.size.height);
-//        [self.view addSubview:scroll];
-//        [scroll release];
 
     }
     
-//    @IBAction func addPage() {
-//        let pageSize = self.canvasView.frame.size.height
-//        let myView = CanvasView(frame: CGRect(x: 0, y: pageSize, width: self.canvasView.frame.size.width, height: self.canvasView.frame.size.width))
-//        self.canvasView.addSubview(myView)
-//    }
+    @IBAction func addPage() {
+        print(pageFinish)
+        let myView = CanvasView(frame: CGRect(x: 0, y: pageFinish, width: 1024, height: 1024))
+        myView.isUserInteractionEnabled = true
+        scroll.addSubview(myView)
+        scroll.contentSize = CGSize(width: view.frame.size.width, height: pageFinish + 1024)
+        pageFinish = (myView.frame.origin.y + 1024)
+        
+        
+        //print(scroll.subviews)
+    }
     
     @IBAction func textButton() {
         

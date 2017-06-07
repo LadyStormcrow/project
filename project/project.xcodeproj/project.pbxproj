@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		62F68115C3F07D583EF68937 /* Pods_projectUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C60B72A90C3C438242276DD /* Pods_projectUITests.framework */; };
 		733D189137AB4A4495885954 /* Pods_projectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18BBEB4FF7C7132F31C00C95 /* Pods_projectTests.framework */; };
+		A3144F721EE81F610073DBF6 /* StrokeGestureRecongiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3144F711EE81F610073DBF6 /* StrokeGestureRecongiser.swift */; };
+		A3144F741EE81FB60073DBF6 /* StrokeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3144F731EE81FB60073DBF6 /* StrokeCollection.swift */; };
+		A3144F761EE820490073DBF6 /* CGDrawingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3144F751EE820490073DBF6 /* CGDrawingEngine.swift */; };
 		A34AAFFA1ED03C1000F07F13 /* NoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AAFF91ED03C1000F07F13 /* NoteObject.swift */; };
 		A354331B1EB970DA00FC83A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354331A1EB970DA00FC83A7 /* AppDelegate.swift */; };
 		A354331D1EB970DA00FC83A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354331C1EB970DA00FC83A7 /* ViewController.swift */; };
@@ -50,6 +53,9 @@
 		7C60B72A90C3C438242276DD /* Pods_projectUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_projectUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83F2563BDCF910E0BBD468D0 /* Pods-project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-project/Pods-project.debug.xcconfig"; sourceTree = "<group>"; };
 		8638812B5573D3BB51BB31DA /* Pods-project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-project.release.xcconfig"; path = "Pods/Target Support Files/Pods-project/Pods-project.release.xcconfig"; sourceTree = "<group>"; };
+		A3144F711EE81F610073DBF6 /* StrokeGestureRecongiser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeGestureRecongiser.swift; sourceTree = "<group>"; };
+		A3144F731EE81FB60073DBF6 /* StrokeCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeCollection.swift; sourceTree = "<group>"; };
+		A3144F751EE820490073DBF6 /* CGDrawingEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGDrawingEngine.swift; sourceTree = "<group>"; };
 		A34AAFF91ED03C1000F07F13 /* NoteObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteObject.swift; sourceTree = "<group>"; };
 		A35433171EB970DA00FC83A7 /* project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A354331A1EB970DA00FC83A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +135,9 @@
 			isa = PBXGroup;
 			children = (
 				A354331A1EB970DA00FC83A7 /* AppDelegate.swift */,
+				A3144F711EE81F610073DBF6 /* StrokeGestureRecongiser.swift */,
+				A3144F731EE81FB60073DBF6 /* StrokeCollection.swift */,
+				A3144F751EE820490073DBF6 /* CGDrawingEngine.swift */,
 				A35433481EB971C700FC83A7 /* CanvasView.swift */,
 				A364A1AB1EC441D2006F1D63 /* ScrollCanvas.swift */,
 				A3A28E821ED5210200B2BBA3 /* View Controllers */,
@@ -484,10 +493,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3144F761EE820490073DBF6 /* CGDrawingEngine.swift in Sources */,
 				A364A1AC1EC441D2006F1D63 /* ScrollCanvas.swift in Sources */,
 				A354331D1EB970DA00FC83A7 /* ViewController.swift in Sources */,
 				A34AAFFA1ED03C1000F07F13 /* NoteObject.swift in Sources */,
 				A354334F1EBAF8BC00FC83A7 /* ColourButton.swift in Sources */,
+				A3144F741EE81FB60073DBF6 /* StrokeCollection.swift in Sources */,
+				A3144F721EE81F610073DBF6 /* StrokeGestureRecongiser.swift in Sources */,
 				A36214781ED275BE006D22D6 /* Notebook.swift in Sources */,
 				A35433531EBDA3FA00FC83A7 /* NotesViewController.swift in Sources */,
 				A35433511EBDA2E900FC83A7 /* TableCellTableViewCell.swift in Sources */,
