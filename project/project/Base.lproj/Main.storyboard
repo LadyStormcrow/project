@@ -23,9 +23,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5Hq-qI-gG2" customClass="CanvasView" customModule="project" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="108" width="1024" height="660"/>
-                            </imageView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQt-XT-aan">
                                 <rect key="frame" x="0.0" y="64" width="1024" height="44"/>
                             </navigationBar>
@@ -89,7 +86,7 @@
                             <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="48J-to-UIR">
                                 <rect key="frame" x="610" y="72" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="1QU-Yr-6M2"/>
+                                    <constraint firstAttribute="width" constant="46" id="9b8-6t-kzS"/>
                                 </constraints>
                                 <state key="normal" title="Text"/>
                                 <connections>
@@ -99,50 +96,55 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R1s-EO-aFx">
                                 <rect key="frame" x="899" y="72" width="46" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="RCE-Q0-j2S"/>
+                                    <constraint firstAttribute="width" constant="46" id="sdq-63-o7g"/>
                                 </constraints>
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="saveButton" destination="BYZ-38-t0r" eventType="touchUpInside" id="Clc-Ot-TeW"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3eq-3I-DqV">
+                                <rect key="frame" x="953" y="72" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="Z4i-b7-qC8"/>
+                                </constraints>
+                                <state key="normal" title="Add"/>
+                                <connections>
+                                    <action selector="addPage" destination="BYZ-38-t0r" eventType="touchUpInside" id="wd9-jT-ZnB"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="baseline" secondItem="Zwm-MX-DZT" secondAttribute="baseline" id="0o6-ba-RSY"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="trailing" secondItem="5Hq-qI-gG2" secondAttribute="trailing" id="0yK-j8-keO"/>
-                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="firstBaseline" secondItem="4Uz-DE-7Te" secondAttribute="firstBaseline" id="39D-AL-YaM"/>
-                            <constraint firstItem="5Hq-qI-gG2" firstAttribute="top" secondItem="Zwm-MX-DZT" secondAttribute="bottom" constant="8" symbolic="YES" id="4Lh-bX-EOY"/>
-                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="top" secondItem="Hq5-Va-sPO" secondAttribute="top" id="5fI-zn-5xt"/>
-                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="top" secondItem="4Uz-DE-7Te" secondAttribute="top" id="6AA-hj-JdO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="R1s-EO-aFx" secondAttribute="trailing" constant="59" id="Dhs-P8-3ax"/>
-                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="firstBaseline" secondItem="Zwm-MX-DZT" secondAttribute="firstBaseline" id="Dvq-9K-phy"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="centerY" secondItem="pkn-ox-zQT" secondAttribute="centerY" id="Fmy-Rf-c4V"/>
-                            <constraint firstItem="48J-to-UIR" firstAttribute="baseline" secondItem="R1s-EO-aFx" secondAttribute="baseline" id="HgL-3r-4iB"/>
-                            <constraint firstItem="48J-to-UIR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="I8F-1f-pqe"/>
-                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="baseline" secondItem="4Uz-DE-7Te" secondAttribute="baseline" id="PQg-U0-6Oy"/>
-                            <constraint firstItem="48J-to-UIR" firstAttribute="leading" secondItem="pkn-ox-zQT" secondAttribute="trailing" constant="8" symbolic="YES" id="QCW-Om-zAI"/>
-                            <constraint firstItem="5Hq-qI-gG2" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Taw-c3-eey"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="VdB-LY-AVD"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="centerX" secondItem="4Uz-DE-7Te" secondAttribute="centerX" id="Yx9-2Y-VSr"/>
-                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="leading" secondItem="Zwm-MX-DZT" secondAttribute="trailing" constant="8" symbolic="YES" id="ZWd-zU-3Ib"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="bcP-hU-BjX"/>
-                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="firstBaseline" secondItem="Zwm-MX-DZT" secondAttribute="firstBaseline" id="eAF-aj-nj7"/>
-                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="leading" secondItem="4Uz-DE-7Te" secondAttribute="trailing" constant="7" id="hJc-JF-pJ9"/>
-                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="baseline" secondItem="Hq5-Va-sPO" secondAttribute="baseline" id="kDU-Ay-bsc"/>
-                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="5Hq-qI-gG2" secondAttribute="leading" id="vbf-XA-r4S"/>
-                            <constraint firstItem="5Hq-qI-gG2" firstAttribute="top" secondItem="MQt-XT-aan" secondAttribute="bottom" id="wip-Pr-V1t"/>
-                            <constraint firstAttribute="trailing" secondItem="MQt-XT-aan" secondAttribute="trailing" id="ws2-Ru-m4q"/>
-                            <constraint firstItem="pkn-ox-zQT" firstAttribute="leading" secondItem="Hq5-Va-sPO" secondAttribute="trailing" constant="8" symbolic="YES" id="zbf-JM-r6F"/>
+                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="leading" secondItem="4Uz-DE-7Te" secondAttribute="trailing" constant="7" id="020-jR-rg5"/>
+                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="6" id="1IG-uW-LHV"/>
+                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="baseline" secondItem="4Uz-DE-7Te" secondAttribute="baseline" id="3JP-dr-fSD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3eq-3I-DqV" secondAttribute="trailing" constant="5" id="3nU-25-6k4"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="centerY" secondItem="pkn-ox-zQT" secondAttribute="centerY" id="3uA-Cp-i4w"/>
+                            <constraint firstItem="3eq-3I-DqV" firstAttribute="leading" secondItem="R1s-EO-aFx" secondAttribute="trailing" constant="8" symbolic="YES" id="48D-bu-ah1"/>
+                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="firstBaseline" secondItem="Hq5-Va-sPO" secondAttribute="firstBaseline" id="DME-PF-5Mm"/>
+                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="top" secondItem="Hq5-Va-sPO" secondAttribute="top" id="IkG-pO-hf4"/>
+                            <constraint firstItem="48J-to-UIR" firstAttribute="leading" secondItem="pkn-ox-zQT" secondAttribute="trailing" constant="8" symbolic="YES" id="J1M-78-V2o"/>
+                            <constraint firstItem="48J-to-UIR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="KwO-kW-DPE"/>
+                            <constraint firstItem="48J-to-UIR" firstAttribute="baseline" secondItem="R1s-EO-aFx" secondAttribute="baseline" id="LSG-TD-rRP"/>
+                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="firstBaseline" secondItem="Zwm-MX-DZT" secondAttribute="firstBaseline" id="Mxs-5T-77z"/>
+                            <constraint firstAttribute="trailing" secondItem="MQt-XT-aan" secondAttribute="trailing" id="VKa-iY-Xcf"/>
+                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="baseline" secondItem="4Uz-DE-7Te" secondAttribute="baseline" id="Wmn-rc-Lbw"/>
+                            <constraint firstItem="Hq5-Va-sPO" firstAttribute="baseline" secondItem="Zwm-MX-DZT" secondAttribute="baseline" id="Y6c-dC-HCX"/>
+                            <constraint firstItem="pkn-ox-zQT" firstAttribute="leading" secondItem="Hq5-Va-sPO" secondAttribute="trailing" constant="8" symbolic="YES" id="Yfr-as-0bl"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="iIQ-RA-6Eq"/>
+                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="leading" secondItem="Zwm-MX-DZT" secondAttribute="trailing" constant="8" symbolic="YES" id="k94-GU-Xhb"/>
+                            <constraint firstItem="R1s-EO-aFx" firstAttribute="baseline" secondItem="3eq-3I-DqV" secondAttribute="baseline" id="lfV-C0-L0A"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="centerX" secondItem="4Uz-DE-7Te" secondAttribute="centerX" id="oRg-AC-VaC"/>
+                            <constraint firstItem="MQt-XT-aan" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="pSU-Tv-c7g"/>
+                            <constraint firstItem="Zwm-MX-DZT" firstAttribute="top" secondItem="4Uz-DE-7Te" secondAttribute="top" id="rfo-VD-PS8"/>
+                            <constraint firstItem="4Uz-DE-7Te" firstAttribute="firstBaseline" secondItem="Hq5-Va-sPO" secondAttribute="firstBaseline" id="zLE-xA-58C"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="canvasView" destination="5Hq-qI-gG2" id="FGe-hw-nJG"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3351" y="892"/>
+            <point key="canvasLocation" x="3350.9765625" y="891.40625"/>
         </scene>
         <!--Note-->
         <scene sceneID="nJx-ee-5Wb">
@@ -218,8 +220,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="rGz-r4-cNs" id="oLo-Vc-ic3"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="viewNoteSegue" id="YnT-lo-Aad"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="loadNoteSegue" id="m7h-xv-TrP"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="viewNoteSegue" id="Xvx-Ba-D2B"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="loadNoteSegue" id="64R-4m-hpf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xjJ-vL-e43" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -246,6 +248,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="YnT-lo-Aad"/>
+        <segue reference="64R-4m-hpf"/>
     </inferredMetricsTieBreakers>
 </document>

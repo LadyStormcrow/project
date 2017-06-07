@@ -38,7 +38,7 @@ class TableCellTableViewCell: UITableViewCell, UITextFieldDelegate {
         changeNameField.delegate = self
         changeNameField.isHidden = true
         noteName.isUserInteractionEnabled = true
-        let aSelector: Selector = "noteNameTapped"
+        let aSelector: Selector = #selector(TableCellTableViewCell.noteNameTapped)
         let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
         tapGesture.numberOfTapsRequired = 1
         noteName.addGestureRecognizer(tapGesture)
