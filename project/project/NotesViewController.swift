@@ -82,14 +82,14 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if (segue.identifier == "viewNoteSegue") { //if an item is clicked in list
-            let upcoming: ViewController = segue.destination
-                as! ViewController
+            let upcoming: CanvasMainViewController = segue.destination
+                as! CanvasMainViewController
             upcoming.isNewItem = true
         }
         
         else if (segue.identifier == "loadNoteSegue") {
-            let upcoming: ViewController = segue.destination
-                as! ViewController
+            let upcoming: CanvasMainViewController = segue.destination
+                as! CanvasMainViewController
             let indexPath = self.tableView.indexPathForSelectedRow!
             let note = data[indexPath.row]
             upcoming.selectedNote = note

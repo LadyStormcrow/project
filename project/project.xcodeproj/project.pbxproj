@@ -12,6 +12,8 @@
 		A3144F721EE81F610073DBF6 /* StrokeGestureRecongiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3144F711EE81F610073DBF6 /* StrokeGestureRecongiser.swift */; };
 		A3144F741EE81FB60073DBF6 /* StrokeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3144F731EE81FB60073DBF6 /* StrokeCollection.swift */; };
 		A3144F761EE820490073DBF6 /* CGDrawingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3144F751EE820490073DBF6 /* CGDrawingEngine.swift */; };
+		A3144F781EE8407B0073DBF6 /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3144F771EE8407A0073DBF6 /* CanvasViewController.swift */; };
+		A3144F7A1EE840DC0073DBF6 /* CGMathExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3144F791EE840DC0073DBF6 /* CGMathExtensions.swift */; };
 		A34AAFFA1ED03C1000F07F13 /* NoteObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AAFF91ED03C1000F07F13 /* NoteObject.swift */; };
 		A354331B1EB970DA00FC83A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354331A1EB970DA00FC83A7 /* AppDelegate.swift */; };
 		A354331D1EB970DA00FC83A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354331C1EB970DA00FC83A7 /* ViewController.swift */; };
@@ -56,6 +58,8 @@
 		A3144F711EE81F610073DBF6 /* StrokeGestureRecongiser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeGestureRecongiser.swift; sourceTree = "<group>"; };
 		A3144F731EE81FB60073DBF6 /* StrokeCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeCollection.swift; sourceTree = "<group>"; };
 		A3144F751EE820490073DBF6 /* CGDrawingEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGDrawingEngine.swift; sourceTree = "<group>"; };
+		A3144F771EE8407A0073DBF6 /* CanvasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
+		A3144F791EE840DC0073DBF6 /* CGMathExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGMathExtensions.swift; sourceTree = "<group>"; };
 		A34AAFF91ED03C1000F07F13 /* NoteObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteObject.swift; sourceTree = "<group>"; };
 		A35433171EB970DA00FC83A7 /* project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A354331A1EB970DA00FC83A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 				A3144F711EE81F610073DBF6 /* StrokeGestureRecongiser.swift */,
 				A3144F731EE81FB60073DBF6 /* StrokeCollection.swift */,
 				A3144F751EE820490073DBF6 /* CGDrawingEngine.swift */,
+				A3144F771EE8407A0073DBF6 /* CanvasViewController.swift */,
+				A3144F791EE840DC0073DBF6 /* CGMathExtensions.swift */,
 				A35433481EB971C700FC83A7 /* CanvasView.swift */,
 				A364A1AB1EC441D2006F1D63 /* ScrollCanvas.swift */,
 				A3A28E821ED5210200B2BBA3 /* View Controllers */,
@@ -496,7 +502,9 @@
 				A3144F761EE820490073DBF6 /* CGDrawingEngine.swift in Sources */,
 				A364A1AC1EC441D2006F1D63 /* ScrollCanvas.swift in Sources */,
 				A354331D1EB970DA00FC83A7 /* ViewController.swift in Sources */,
+				A3144F7A1EE840DC0073DBF6 /* CGMathExtensions.swift in Sources */,
 				A34AAFFA1ED03C1000F07F13 /* NoteObject.swift in Sources */,
+				A3144F781EE8407B0073DBF6 /* CanvasViewController.swift in Sources */,
 				A354334F1EBAF8BC00FC83A7 /* ColourButton.swift in Sources */,
 				A3144F741EE81FB60073DBF6 /* StrokeCollection.swift in Sources */,
 				A3144F721EE81F610073DBF6 /* StrokeGestureRecongiser.swift in Sources */,

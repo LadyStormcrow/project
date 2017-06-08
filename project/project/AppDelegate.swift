@@ -16,6 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         application.applicationSupportsShakeToEdit = true
+        
+//        // Minimal basic setup without a storyboard.
+//        let localWindow = UIWindow(frame: UIScreen.main.bounds)
+//        localWindow.rootViewController = CanvasMainViewController()
+//        localWindow.makeKeyAndVisible()
+//        window = localWindow
+        
+
         return true
     }
 
