@@ -90,12 +90,14 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     @IBAction func addPage() {
-        print(pageFinish)
-        let myView = StrokeCGView(frame: CGRect(x: 0, y: pageFinish, width: 1024, height: 1024))
-        myView.isUserInteractionEnabled = true
-        scrollView.addSubview(myView)
-        scrollView.contentSize = CGSize(width: view.frame.size.width, height: pageFinish + 1024)
-        pageFinish = (myView.frame.origin.y + 1024)
+//        let myView = StrokeCGView(frame: CGRect(x: 0, y: pageFinish, width: 1024, height: 1024))
+//        myView.isUserInteractionEnabled = true
+//        scrollView.addSubview(myView)
+//        scrollView.contentSize = CGSize(width: view.frame.size.width, height: pageFinish + 1024)
+        cgView.frame.size.height = pageFinish + 1024
+        scrollView.contentSize = cgView.bounds.size
+        cgView.setNeedsDisplay()
+        pageFinish = (pageFinish + 1024)
         
     }
 
