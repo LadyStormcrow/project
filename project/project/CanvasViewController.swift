@@ -88,8 +88,6 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
             //canvasView.image = myImage
         }
     }
-    
-
 
     @IBAction func addPage() {
         print(pageFinish)
