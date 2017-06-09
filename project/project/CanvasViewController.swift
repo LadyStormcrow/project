@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import QuartzCore
 import RealmSwift
 
 class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
@@ -85,7 +86,7 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         if !(isNewItem!) {
             print(selectedNote!.directoryPath)
             let myImage = loadNote(fileURL: selectedNote!.directoryPath)
-            //canvasView.image = myImage
+            //cgView = myImage
         }
     }
 
@@ -94,15 +95,6 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         scrollView.contentSize = cgView.bounds.size
         cgView.setNeedsDisplay()
         pageFinish = (pageFinish + 1024)
-        
-//        print(scrollView.subviews.count)
-//        
-//        let myView = StrokeCGView(frame: CGRect(x: 0, y: pageFinish, width: view.frame.size.width, height: view.frame.size.height))
-//        myView.isUserInteractionEnabled = true
-//        scrollView.addSubview(myView)
-//        print(scrollView.subviews.count)
-//        scrollView.contentSize.height = pageFinish + 1024
-//        pageFinish = (pageFinish + 1024)
         
     }
 
@@ -117,12 +109,13 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         newNote.name = convertedDate
         newNote.created = currentDate
         
-        UIGraphicsBeginImageContextWithOptions(canvasView.bounds.size, false, 0.0)
-        canvasView.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
+        UIGraphicsBeginImageContextWithOptions(cgView.bounds.size, false, 0.0)
+        cgView.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
         let imageData = UIImagePNGRepresentation(image!)
+        
         
         do {
             
@@ -134,9 +127,20 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
             
             let fileURL = documentsURL.appendingPathComponent("\(newNote.name)").appendingPathExtension("png")
             
+    
+            try imageData?.write(to: fileURL, options: .atomic)
+            
             newNote.directoryPath = "\(newNote.name).png"
             
-            try imageData?.write(to: fileURL, options: .atomic)
+//            UIGraphicsBeginPDFContextToFile(fileURL.path, cgView.bounds, nil)
+//            UIGraphicsBeginPDFPageWithInfo(cgView.bounds, nil)
+//            
+//            let context = UIGraphicsGetCurrentContext()!
+//            
+//            //cgView.drawHierarchy(in: cgView.bounds, afterScreenUpdates: false)
+//            UIGraphicsPDFRenderer(bounds: cgView.bounds)
+//            
+//            UIGraphicsEndPDFContext()
             
         } catch {
             print(error)
