@@ -6,6 +6,7 @@
 //  Copyright © 2017 nstho4. All rights reserved.
 //
 
+
 import UIKit
 
 
@@ -122,15 +123,12 @@ class StrokeCGView: UIView {
         }
         dirtyRectViews = [dirtyRectView(), dirtyRectView()]
     }
+
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-//    func setColour(colour: UIColor) {
-//        fillColorRegular = colour.cgColor
-//        fillColorCoalesced = colour.cgColor
-//    }
+    //    func setColour(colour: UIColor) {
+    //        fillColorRegular = colour.cgColor
+    //        fillColorCoalesced = colour.cgColor
+    //    }
     
     // MARK: Drawing methods.
     
@@ -159,7 +157,7 @@ class StrokeCGView: UIView {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         //let strokeColor = UIColor.black
         
-
+        
         
         let lineSettings: (()->())
         let forceEstimatedLineSettings: (()->())
@@ -234,14 +232,14 @@ class StrokeCGView: UIView {
                 } else {
                     lineSettings()
                 }
-
+                
                 
                 context.beginPath()
                 context.move(to: fromSample.location + fromUnitVector)
                 context.addLine(to: toSample.location + toUnitVector)
                 context.addLine(to: toSample.location - toUnitVector)
                 context.addLine(to: fromSample.location - fromUnitVector)
-    
+                
                 context.closePath()
                 context.drawPath(using: .fillStroke)
                 
@@ -273,10 +271,10 @@ class StrokeCGView: UIView {
     
     
     override func draw(_ rect: CGRect) {
-        UIColor.white.set()
-        UIRectFill(rect)
+        //UIColor.clear.set()
+        //UIRectFill(rect)
         
-        // Optimization opportunity: Draw the existing collection in a different view, 
+        // Optimization opportunity: Draw the existing collection in a different view,
         // and only draw each time we add a stroke.
         if let strokeCollection = strokeCollection {
             for stroke in strokeCollection.strokes {
@@ -289,6 +287,8 @@ class StrokeCGView: UIView {
         }
     }
     
-    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }

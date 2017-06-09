@@ -2,10 +2,6 @@
 //  CanvasViewController.swift
 //  project
 //
-//  Created by Nicola Thouliss on 8/06/2017.
-//  Copyright © 2017 nstho4. All rights reserved.
-//
-
 import UIKit
 import QuartzCore
 import RealmSwift
@@ -31,6 +27,7 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var strokeCollection = StrokeCollection()
     var scrollView: UIScrollView!
+    var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,22 +36,41 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let scrollView = UIScrollView(frame: CGRect(x: 0.0, y: 108.0, width: view.frame.size.width, height: view.frame.size.height))
         scrollView.autoresizingMask = flexibleDimensions
-        view.addSubview(scrollView)
+        view.insertSubview(scrollView, at: 0)
         self.scrollView = scrollView
         
-        let canvasView = StrokeCGView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        let imageSetup = UIImageView(frame: CGRect(x: 0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height))
+        self.imageView = imageSetup
+        scrollView.addSubview(imageSetup)
+        imageView.backgroundColor = UIColor.clear
+        
+        let canvasView = StrokeCGView(frame: CGRect(x: 0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height))
         canvasView.autoresizingMask = flexibleDimensions
+        //canvasView.alpha = 0.0
+        
         self.cgView = canvasView
         
-        canvasView.isUserInteractionEnabled = true
+        cgView.isUserInteractionEnabled = true
         pageFinish = canvasView.frame.size.height
+        
         
         scrollView.contentSize = cgView.bounds.size
         scrollView.isUserInteractionEnabled = true
         scrollView.isPagingEnabled = true
         scrollView.addSubview(canvasView)
         
+        print(scrollView.subviews)
+        print(scrollView.subviews.count)
+        
         view.backgroundColor = UIColor.white
+        
+        imageView.isUserInteractionEnabled = true
+        imageView.backgroundColor = UIColor.white
+        //scrollView.bringSubview(toFront: cgView)
+        cgView.backgroundColor = .clear
+        //print(scrollView.subviews[1].backgroundColor)
+        //cgView.alpha = 1.0
+        
         
         scrollView.panGestureRecognizer.allowedTouchTypes = [UITouchType.direct.rawValue as NSNumber]
         scrollView.pinchGestureRecognizer?.allowedTouchTypes = [UITouchType.direct.rawValue as NSNumber]
@@ -84,12 +100,15 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         setupPencilUI()
         
         if !(isNewItem!) {
-            print(selectedNote!.directoryPath)
+            //print(selectedNote!.directoryPath)
             let myImage = loadNote(fileURL: selectedNote!.directoryPath)
+            imageView.image = myImage
+            print(scrollView.subviews)
+            //cgView.backgroundColor = UIColor.clear
             //cgView = myImage
         }
     }
-
+    
     @IBAction func addPage() {
         cgView.frame.size.height = pageFinish + 1024
         scrollView.contentSize = cgView.bounds.size
@@ -97,8 +116,8 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         pageFinish = (pageFinish + 1024)
         
     }
-
-
+    
+    
     @IBAction func saveButton() {
         
         let currentDate = NSDate()
@@ -127,20 +146,20 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
             
             let fileURL = documentsURL.appendingPathComponent("\(newNote.name)").appendingPathExtension("png")
             
-    
+            
             try imageData?.write(to: fileURL, options: .atomic)
             
             newNote.directoryPath = "\(newNote.name).png"
             
-//            UIGraphicsBeginPDFContextToFile(fileURL.path, cgView.bounds, nil)
-//            UIGraphicsBeginPDFPageWithInfo(cgView.bounds, nil)
-//            
-//            let context = UIGraphicsGetCurrentContext()!
-//            
-//            //cgView.drawHierarchy(in: cgView.bounds, afterScreenUpdates: false)
-//            UIGraphicsPDFRenderer(bounds: cgView.bounds)
-//            
-//            UIGraphicsEndPDFContext()
+            //            UIGraphicsBeginPDFContextToFile(fileURL.path, cgView.bounds, nil)
+            //            UIGraphicsBeginPDFPageWithInfo(cgView.bounds, nil)
+            //
+            //            let context = UIGraphicsGetCurrentContext()!
+            //
+            //            //cgView.drawHierarchy(in: cgView.bounds, afterScreenUpdates: false)
+            //            UIGraphicsPDFRenderer(bounds: cgView.bounds)
+            //
+            //            UIGraphicsEndPDFContext()
             
         } catch {
             print(error)
@@ -150,8 +169,8 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
             realm.add(newNote)
         }
     }
-
-
+    
+    
     @IBAction func btnPushButton(button: ColourButton) {
         if button.isBlueButton {
             let blue = UIColor(red: 0.1215686275, green: 0.5921568627, blue: 1.0, alpha: 1.0)
@@ -170,8 +189,8 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
             cgView.fillColorRegular = white.cgColor
         }
     }
-
-
+    
+    
     func loadNote(fileURL: String) -> UIImage {
         let documentsURL = try! FileManager.default.url(
             for: .documentDirectory,
@@ -182,8 +201,8 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         let image = UIImage(contentsOfFile: filePath.path)
         return image!
     }
-
-
+    
+    
     // MARK: View setup helpers.
     
     override func viewDidAppear(_ animated: Bool) {
@@ -297,7 +316,7 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-        
+    
     // We want the pencil to recognize simultaniously with all others.
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer === pencilStrokeRecognizer {
@@ -312,9 +331,9 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
 
 extension CanvasMainViewController: UIScrollViewDelegate {
     
-//    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-//        return self.canvasContainerView
-//    }
+    //    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    //        return self.canvasContainerView
+    //    }
     
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
         var desiredScale = self.traitCollection.displayScale
@@ -330,6 +349,5 @@ extension CanvasMainViewController: UIScrollViewDelegate {
         }
     }
 }
-
 
 
