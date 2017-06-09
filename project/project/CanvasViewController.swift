@@ -90,14 +90,19 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
     @IBAction func addPage() {
-//        let myView = StrokeCGView(frame: CGRect(x: 0, y: pageFinish, width: 1024, height: 1024))
-//        myView.isUserInteractionEnabled = true
-//        scrollView.addSubview(myView)
-//        scrollView.contentSize = CGSize(width: view.frame.size.width, height: pageFinish + 1024)
         cgView.frame.size.height = pageFinish + 1024
         scrollView.contentSize = cgView.bounds.size
         cgView.setNeedsDisplay()
         pageFinish = (pageFinish + 1024)
+        
+//        print(scrollView.subviews.count)
+//        
+//        let myView = StrokeCGView(frame: CGRect(x: 0, y: pageFinish, width: view.frame.size.width, height: view.frame.size.height))
+//        myView.isUserInteractionEnabled = true
+//        scrollView.addSubview(myView)
+//        print(scrollView.subviews.count)
+//        scrollView.contentSize.height = pageFinish + 1024
+//        pageFinish = (pageFinish + 1024)
         
     }
 
@@ -276,13 +281,11 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         didSet {
             if pencilMode {
                 scrollView.panGestureRecognizer.minimumNumberOfTouches = 1
-                //pencilButton.isHidden = false
                 if let view = fingerStrokeRecognizer.view {
                     view.removeGestureRecognizer(fingerStrokeRecognizer)
                 }
             } else {
                 scrollView.panGestureRecognizer.minimumNumberOfTouches = 2
-                //pencilButton.isHidden = true
                 if fingerStrokeRecognizer.view == nil {
                     scrollView.addGestureRecognizer(fingerStrokeRecognizer)
                 }
@@ -290,20 +293,7 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    
-    // Since our gesture recognizer is beginning immediately, we do the hit test ambiguation here
-    // instead of adding failure requirements to the gesture for minimizing the delay
-    // to the first action sent and therefore the first lines drawn.
-//    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-//        
-////        if leftRingControl.hitTest(touch.location(in:leftRingControl), with: nil) != nil {
-////            return false
-////        }
-//    
-//        
-//        return true
-//    }
-    
+        
     // We want the pencil to recognize simultaniously with all others.
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer === pencilStrokeRecognizer {

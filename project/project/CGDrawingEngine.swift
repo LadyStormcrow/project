@@ -40,7 +40,7 @@ class StrokeCGView: UIView {
     var strokeToDraw: Stroke? {
         didSet {
             if oldValue !== strokeToDraw && oldValue != nil {
-                setNeedsDisplay()
+                //setNeedsDisplay()
             } else {
                 if let stroke = strokeToDraw {
                     setNeedsDisplay(for: stroke)
@@ -159,6 +159,8 @@ class StrokeCGView: UIView {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         //let strokeColor = UIColor.black
         
+
+        
         let lineSettings: (()->())
         let forceEstimatedLineSettings: (()->())
         lineSettings = {
@@ -185,7 +187,7 @@ class StrokeCGView: UIView {
         var lockedAzimuthUnitVector: CGVector?
         let azimuthLockAltitudeThreshold = CGFloat.pi / 2.0 * 0.80 // locking azimuth at 80% altitude
         
-        lineSettings()
+        //lineSettings()
         
         var forceAccessBlock = {(sample: StrokeSample) -> CGFloat in
             sample.forceWithDefault
@@ -232,12 +234,14 @@ class StrokeCGView: UIView {
                 } else {
                     lineSettings()
                 }
+
                 
                 context.beginPath()
                 context.move(to: fromSample.location + fromUnitVector)
                 context.addLine(to: toSample.location + toUnitVector)
                 context.addLine(to: toSample.location - toUnitVector)
                 context.addLine(to: fromSample.location - fromUnitVector)
+    
                 context.closePath()
                 context.drawPath(using: .fillStroke)
                 
@@ -246,6 +250,7 @@ class StrokeCGView: UIView {
                     heldFromSampleUnitVector = nil
                 }
             }
+            
         }
         
         if stroke.samples.count == 1 {
@@ -283,5 +288,7 @@ class StrokeCGView: UIView {
             draw(stroke: stroke, in: rect, isActive: true)
         }
     }
+    
+    
     
 }

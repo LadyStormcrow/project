@@ -88,7 +88,7 @@ enum StrokeState {
 }
 
 class Stroke {
-    static let calligraphyFallbackAzimuthUnitVector = CGVector(dx: 1.0, dy:1.0).normalize!
+    //static let calligraphyFallbackAzimuthUnitVector = CGVector(dx: 1.0, dy:1.0).normalize!
     
     var samples: [StrokeSample] = []
     var predictedSamples: [StrokeSample] = []
