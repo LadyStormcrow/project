@@ -46,7 +46,6 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let canvasView = StrokeCGView(frame: CGRect(x: 0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height))
         canvasView.autoresizingMask = flexibleDimensions
-        //canvasView.alpha = 0.0
         
         self.cgView = canvasView
         
@@ -66,10 +65,7 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         
         imageView.isUserInteractionEnabled = true
         imageView.backgroundColor = UIColor.white
-        //scrollView.bringSubview(toFront: cgView)
         cgView.backgroundColor = .clear
-        //print(scrollView.subviews[1].backgroundColor)
-        //cgView.alpha = 1.0
         
         
         scrollView.panGestureRecognizer.allowedTouchTypes = [UITouchType.direct.rawValue as NSNumber]
@@ -100,12 +96,8 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         setupPencilUI()
         
         if !(isNewItem!) {
-            //print(selectedNote!.directoryPath)
             let myImage = loadNote(fileURL: selectedNote!.directoryPath)
             imageView.image = myImage
-            print(scrollView.subviews)
-            //cgView.backgroundColor = UIColor.clear
-            //cgView = myImage
         }
     }
     
@@ -124,50 +116,82 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, MMMM dd, yyyy, HH:mm:ssZZZZZ"
         let convertedDate = dateFormatter.string(from: currentDate as Date)
-        let newNote = NoteObject()
-        newNote.name = convertedDate
-        newNote.created = currentDate
+        
+        if !(isNewItem!) {
+            let note = selectedNote!
+            let notePath = note.directoryPath
+            let filePath = documentDirectory().appendingPathComponent(notePath)
+            
+            let noteImage = captureNote()
+            let image = UIImagePNGRepresentation(noteImage)
+            
+            try! image?.write(to: filePath, options: .atomic)
+            
+            try! realm.write {
+                note.modified = currentDate
+            }
+            
+        } else {
+        
+            let newNote = NoteObject()
+            newNote.name = convertedDate
+            newNote.created = currentDate
+            
+            let image = captureNote()
+            let imageData = UIImagePNGRepresentation(image)
+            
+            let documents = documentDirectory()
+            let fileURL = documents.appendingPathComponent("\(newNote.name)").appendingPathExtension("png")
+            
+            try! imageData?.write(to: fileURL, options: .atomic)
+            
+            newNote.directoryPath = "\(newNote.name).png"
+            
+            try! self.realm.write {
+                realm.add(newNote)
+            }
+            
+                //            UIGraphicsBeginPDFContextToFile(fileURL.path, cgView.bounds, nil)
+                //            UIGraphicsBeginPDFPageWithInfo(cgView.bounds, nil)
+                //
+                //            let context = UIGraphicsGetCurrentContext()!
+                //
+                //            //cgView.drawHierarchy(in: cgView.bounds, afterScreenUpdates: false)
+                //            UIGraphicsPDFRenderer(bounds: cgView.bounds)
+                //
+                //            UIGraphicsEndPDFContext()
+            
+        }
+    }
+    
+    func loadNote(fileURL: String) -> UIImage {
+        let documents = documentDirectory()
+        let filePath = documents.appendingPathComponent(fileURL)
+        let image = UIImage(contentsOfFile: filePath.path)
+        return image!
+    }
+    
+    func documentDirectory()-> URL {
+        
+            
+        let documentsURL = try! FileManager.default.url(
+            for: .documentDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false)
+        
+        return documentsURL
+        
+    }
+    
+    func captureNote() -> UIImage {
         
         UIGraphicsBeginImageContextWithOptions(cgView.bounds.size, false, 0.0)
         cgView.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        let imageData = UIImagePNGRepresentation(image!)
-        
-        
-        do {
-            
-            let documentsURL = try FileManager.default.url(
-                for: .documentDirectory,
-                in: .userDomainMask,
-                appropriateFor: nil,
-                create: false)
-            
-            let fileURL = documentsURL.appendingPathComponent("\(newNote.name)").appendingPathExtension("png")
-            
-            
-            try imageData?.write(to: fileURL, options: .atomic)
-            
-            newNote.directoryPath = "\(newNote.name).png"
-            
-            //            UIGraphicsBeginPDFContextToFile(fileURL.path, cgView.bounds, nil)
-            //            UIGraphicsBeginPDFPageWithInfo(cgView.bounds, nil)
-            //
-            //            let context = UIGraphicsGetCurrentContext()!
-            //
-            //            //cgView.drawHierarchy(in: cgView.bounds, afterScreenUpdates: false)
-            //            UIGraphicsPDFRenderer(bounds: cgView.bounds)
-            //
-            //            UIGraphicsEndPDFContext()
-            
-        } catch {
-            print(error)
-        }
-        
-        try! self.realm.write {
-            realm.add(newNote)
-        }
+        return image!
     }
     
     
@@ -189,18 +213,7 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
             cgView.fillColorRegular = white.cgColor
         }
     }
-    
-    
-    func loadNote(fileURL: String) -> UIImage {
-        let documentsURL = try! FileManager.default.url(
-            for: .documentDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: false)
-        let filePath = documentsURL.appendingPathComponent(fileURL)
-        let image = UIImage(contentsOfFile: filePath.path)
-        return image!
-    }
+
     
     
     // MARK: View setup helpers.
