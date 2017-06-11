@@ -16,12 +16,13 @@ class TableCellTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var noteName: UILabel!
     @IBOutlet weak var changeNameField: UITextField!
     
-    var cellNote: NoteObject! = nil
+    var cellNote: Note! = nil
     let realm = try! Realm()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         initalView()
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -30,7 +31,7 @@ class TableCellTableViewCell: UITableViewCell, UITextFieldDelegate {
         // Configure the view for the selected state
     }
 
-    func configureWithNote(_ note: NoteObject){
+    func configureWithNote(_ note: Note){
         noteId = note.noteId
     }
     
@@ -48,7 +49,6 @@ class TableCellTableViewCell: UITableViewCell, UITextFieldDelegate {
         noteName.isHidden = true
         changeNameField.isHidden = false
         changeNameField.text = noteName.text
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -62,10 +62,13 @@ class TableCellTableViewCell: UITableViewCell, UITextFieldDelegate {
             appropriateFor: nil,
             create: false)
         let fileURL = documentsURL.appendingPathComponent("\(cellNote.name)").appendingPathExtension("png")
-        try! FileManager.default.moveItem(at: fileURL, to: documentsURL.appendingPathComponent("\(noteName.text!)").appendingPathExtension("png"))
-        try! realm.write {
-            cellNote.name = noteName.text!
-            cellNote.directoryPath = "\(noteName.text!).png"
+        
+        if !FileManager.default.fileExists(atPath: fileURL.path) {
+            try! FileManager.default.moveItem(at: fileURL, to: documentsURL.appendingPathComponent("\(noteName.text!)").appendingPathExtension("png"))
+            try! realm.write {
+                cellNote.name = noteName.text!
+                cellNote.directoryPath = "\(noteName.text!).png"
+            }
         }
 
 

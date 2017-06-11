@@ -5,6 +5,7 @@
 //  Created by Nicola Thouliss on 6/05/2017.
 //  Copyright © 2017 nstho4. All rights reserved.
 //
+//Search bar functionality was implemented with assisstance from this tutorial https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
 
 import UIKit
 import Foundation
@@ -13,38 +14,87 @@ import RealmSwift
 
 class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
-    
-    var data: Results<NoteObject>!
+    var data: Results<Note>!
 
     @IBOutlet weak var tableView: UITableView!
+    
+    let searchController = UISearchController(searchResultsController: nil)
+    var notes: Array<Note>!
+    var filteredNotes: Array<Note>!
     
     @IBAction func addNote(_ sender: UIBarButtonItem) {
         self.performSegue(withIdentifier: "viewNoteSegue", sender: self)
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let realm = try! Realm() //NEED TO CATCH EXCEPTION HERE!!
-        data = realm.objects(NoteObject.self)
+        data = realm.objects(Note.self)
+        notes = Array(data)
+        filteredNotes = Array(data)
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+    
+    //Stack Overflow: https://stackoverflow.com/questions/26070242/move-view-with-keyboard-using-swift
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    //Stack Overflow: https://stackoverflow.com/questions/26070242/move-view-with-keyboard-using-swift
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
     
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filteredNotes = notes.filter({(note: Note) -> Bool in return ((note.name.lowercased().range(of: searchText.lowercased())) != nil)})
+        tableView.reloadData()
+    }
+    
+    
+
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.data.count
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return self.filteredNotes.count
+        } else {
+            return self.data.count
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "cell") as! TableCellTableViewCell
-        let note = data[indexPath.row]
+        let note: Note
+        if searchController.isActive && searchController.searchBar.text! != "" {
+            note = filteredNotes[indexPath.row]
+        } else {
+            note = data[indexPath.row]
+        }
+        
         cell.cellNote = note
         cell.configureWithNote(note)
         cell.noteName.text = note.name
@@ -52,7 +102,6 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
         
     }
-    
     
     func tableView(_ tableView: UITableView, didSelectRowAt
         indexPath: IndexPath){
@@ -106,4 +155,10 @@ class NotesViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
 
+}
+
+extension NotesViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchText: searchController.searchBar.text!)
+    }
 }

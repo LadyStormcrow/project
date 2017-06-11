@@ -23,7 +23,7 @@ class ColourButton: UIButton {
         
         
         if (eraser) {
-            fillColor = UIColor.white
+            fillColor = UIColor(red: 0.9019607843, green: 0.9019607843, blue: 0.9019607843, alpha: 1.0)
         }
         
         

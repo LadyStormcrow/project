@@ -4,21 +4,21 @@
 //
 //  Created by Nicola Thouliss on 7/06/2017.
 //  Copyright © 2017 nstho4. All rights reserved.
-//
+//  Implementation helped by https://developer.apple.com/library/content/samplecode/SpeedSketch/Introduction/Intro.html
 
 
 import UIKit
 
 
 enum StrokeViewDisplayOptions {
-    //    case debug
-    //    case calligraphy
+    case debug
+    case calligraphy
     case ink
 }
 
 
 class StrokeCGView: UIView {
-    var displayOptions = StrokeViewDisplayOptions.ink {
+    var displayOptions = StrokeViewDisplayOptions.ink { //default pen is in ink
         didSet {
             if strokeCollection != nil {
                 setNeedsDisplay()
@@ -41,7 +41,7 @@ class StrokeCGView: UIView {
     var strokeToDraw: Stroke? {
         didSet {
             if oldValue !== strokeToDraw && oldValue != nil {
-                //setNeedsDisplay()
+                setNeedsDisplay()
             } else {
                 if let stroke = strokeToDraw {
                     setNeedsDisplay(for: stroke)
@@ -123,28 +123,17 @@ class StrokeCGView: UIView {
         }
         dirtyRectViews = [dirtyRectView(), dirtyRectView()]
     }
-
     
-    //    func setColour(colour: UIColor) {
-    //        fillColorRegular = colour.cgColor
-    //        fillColorCoalesced = colour.cgColor
-    //    }
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     // MARK: Drawing methods.
-    
-    
-    /**
-     Note: this is not a particularily efficient way to draw a great stroke path
-     with CoreGraphics. It is just a way to produce an interesting looking result.
-     For a real world example you would reuse and cache CGPaths and draw longer
-     paths instead of an aweful lot of tiny ones, etc. You would also respect the
-     draw rect to cull your draw requests. And you would use bezier paths to
-     interpolate between the points to get a smooother curve.
-     */
+    //Takes the stroke from the Stroke class to determine colour, width ect.
     
     var strokeColor = UIColor.black
     var fillColorRegular = UIColor.black.cgColor
-    
     func draw(stroke: Stroke, in rect:CGRect, isActive active: Bool) {
         let displayOptions = self.displayOptions
         
@@ -155,17 +144,17 @@ class StrokeCGView: UIView {
         let sampleCount = stroke.samples.count
         guard sampleCount > 0 else { return }
         guard let context = UIGraphicsGetCurrentContext() else { return }
-        //let strokeColor = UIColor.black
-        
         
         
         let lineSettings: (()->())
         let forceEstimatedLineSettings: (()->())
+
         lineSettings = {
             context.setLineWidth(0.25)
             context.setStrokeColor(self.strokeColor.cgColor)
         }
         forceEstimatedLineSettings = lineSettings
+
         
         let azimuthSettings = {
             context.setLineWidth(1.5)
@@ -178,14 +167,13 @@ class StrokeCGView: UIView {
         var forceMultiplier = CGFloat(2.0)
         var forceOffset = CGFloat(0.1)
         
-        //var fillColorRegular = UIColor.black.cgColor
-        var fillColorCoalesced = UIColor.lightGray.cgColor
+        let fillColorCoalesced = UIColor.lightGray.cgColor
         let fillColorPredicted = UIColor.red.cgColor
         
         var lockedAzimuthUnitVector: CGVector?
         let azimuthLockAltitudeThreshold = CGFloat.pi / 2.0 * 0.80 // locking azimuth at 80% altitude
         
-        //lineSettings()
+        lineSettings()
         
         var forceAccessBlock = {(sample: StrokeSample) -> CGFloat in
             sample.forceWithDefault
@@ -195,6 +183,17 @@ class StrokeCGView: UIView {
             forceAccessBlock = {(sample: StrokeSample) -> CGFloat in
                 return sample.perpendicularForce
             }
+        }
+        
+        // Make the force influence less pronounced for the calligraphy pen.
+        if displayOptions == .calligraphy {
+            let previousGetter = forceAccessBlock
+            forceAccessBlock = {(sample: StrokeSample) -> CGFloat in
+                return max(previousGetter(sample), 1.0)
+            }
+            // make force value less pronounced
+            forceMultiplier = 1.0
+            forceOffset = 10.0
         }
         
         let previousGetter = forceAccessBlock
@@ -220,35 +219,102 @@ class StrokeCGView: UIView {
                 
                 context.setFillColor(fillColorRegular)
                 
-                let fromUnitVector = (heldFromSampleUnitVector != nil ? heldFromSampleUnitVector! : segment.fromSampleUnitNormal) * forceAccessBlock(fromSample)
-                let toUnitVector = segment.toSampleUnitNormal * forceAccessBlock(toSample)
-                
-                let isForceEstimated = fromSample.estimatedProperties.contains(.force) || toSample.estimatedProperties.contains(.force)
-                if isForceEstimated {
-                    if lastEstimatedSample == nil {
-                        lastEstimatedSample = (segment.fromSampleIndex+1,toSample)
+                if displayOptions == .calligraphy {
+                    
+                    var fromAzimuthUnitVector = Stroke.calligraphyFallbackAzimuthUnitVector
+                    var toAzimuthUnitVector   = Stroke.calligraphyFallbackAzimuthUnitVector
+                    
+                    if fromSample.azimuth != nil {
+                        
+                        if lockedAzimuthUnitVector == nil {
+                            lockedAzimuthUnitVector = fromSample.azimuthUnitVector
+                        }
+                        fromAzimuthUnitVector = fromSample.azimuthUnitVector
+                        toAzimuthUnitVector = toSample.azimuthUnitVector
+                        if fromSample.altitude! > azimuthLockAltitudeThreshold {
+                            fromAzimuthUnitVector = lockedAzimuthUnitVector!
+                        }
+                        if toSample.altitude! > azimuthLockAltitudeThreshold {
+                            toAzimuthUnitVector = lockedAzimuthUnitVector!
+                        } else {
+                            lockedAzimuthUnitVector = toAzimuthUnitVector
+                        }
+                        
                     }
-                    forceEstimatedLineSettings()
+                    // Rotate 90 degrees
+                    let calligraphyTransform = CGAffineTransform(rotationAngle: CGFloat.pi / 2.0)
+                    fromAzimuthUnitVector = fromAzimuthUnitVector.apply(transform: calligraphyTransform)
+                    toAzimuthUnitVector = toAzimuthUnitVector.apply(transform: calligraphyTransform)
+                    
+                    let fromUnitVector = fromAzimuthUnitVector * forceAccessBlock(fromSample)
+                    let toUnitVector = toAzimuthUnitVector * forceAccessBlock(toSample)
+                    
+                    context.beginPath()
+                    context.move(to: fromSample.location + fromUnitVector)
+                    context.addLine(to: toSample.location + toUnitVector)
+                    context.addLine(to: toSample.location - toUnitVector)
+                    context.addLine(to: fromSample.location - fromUnitVector)
+                    context.closePath()
+                    
+                    context.drawPath(using: .fillStroke)
+                    
                 } else {
-                    lineSettings()
+                    
+                    let fromUnitVector = (heldFromSampleUnitVector != nil ? heldFromSampleUnitVector! : segment.fromSampleUnitNormal) * forceAccessBlock(fromSample)
+                    let toUnitVector = segment.toSampleUnitNormal * forceAccessBlock(toSample)
+                    
+                    let isForceEstimated = fromSample.estimatedProperties.contains(.force) || toSample.estimatedProperties.contains(.force)
+                    if isForceEstimated {
+                        if lastEstimatedSample == nil {
+                            lastEstimatedSample = (segment.fromSampleIndex+1,toSample)
+                        }
+                        forceEstimatedLineSettings()
+                    } else {
+                        lineSettings()
+                    }
+                    
+                    context.beginPath()
+                    context.move(to: fromSample.location + fromUnitVector)
+                    context.addLine(to: toSample.location + toUnitVector)
+                    context.addLine(to: toSample.location - toUnitVector)
+                    context.addLine(to: fromSample.location - fromUnitVector)
+                    context.closePath()
+                    context.drawPath(using: .fillStroke)
                 }
                 
-                
-                context.beginPath()
-                context.move(to: fromSample.location + fromUnitVector)
-                context.addLine(to: toSample.location + toUnitVector)
-                context.addLine(to: toSample.location - toUnitVector)
-                context.addLine(to: fromSample.location - fromUnitVector)
-                
-                context.closePath()
-                context.drawPath(using: .fillStroke)
+                let isEstimated = fromSample.estimatedProperties.contains(.azimuth)
+                if fromSample.azimuth != nil && (!fromSample.coalesced || isEstimated) && !fromSample.predicted && displayOptions == .debug {
+                    
+                    let length = CGFloat(20.0)
+                    let azimuthUnitVector = fromSample.azimuthUnitVector
+                    let azimuthTarget = fromSample.location + azimuthUnitVector * length
+                    let altitudeStart = azimuthTarget + (azimuthUnitVector * (length / -2.0))
+                    let altitudeTarget = altitudeStart + (azimuthUnitVector * (length / 2.0)).apply(transform: CGAffineTransform(rotationAngle: fromSample.altitude!))
+                    
+                    // Draw altitude as black line coming from the center of the azimuth.
+                    altitudeSettings()
+                    context.beginPath()
+                    context.move(to: altitudeStart)
+                    context.addLine(to: altitudeTarget)
+                    context.strokePath()
+                    
+                    // Draw azimuth as orange (or blue if estimated) line.
+                    azimuthSettings()
+                    if isEstimated {
+                        context.setStrokeColor(UIColor.blue.cgColor)
+                    }
+                    context.beginPath()
+                    context.move(to: fromSample.location)
+                    context.addLine(to: azimuthTarget)
+                    context.strokePath()
+                    
+                }
                 
                 if heldFromSample != nil {
                     heldFromSample = nil
                     heldFromSampleUnitVector = nil
                 }
             }
-            
         }
         
         if stroke.samples.count == 1 {
@@ -269,9 +335,8 @@ class StrokeCGView: UIView {
         
     }
     
-    
     override func draw(_ rect: CGRect) {
-        //UIColor.clear.set()
+        //UIColor.white.set()
         //UIRectFill(rect)
         
         // Optimization opportunity: Draw the existing collection in a different view,
@@ -285,10 +350,6 @@ class StrokeCGView: UIView {
         if let stroke = strokeToDraw {
             draw(stroke: stroke, in: rect, isActive: true)
         }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
 }

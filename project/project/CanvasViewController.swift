@@ -1,22 +1,24 @@
 //
 //  CanvasViewController.swift
 //  project
-//
+//  drawing functionality was implemented with assitance from https://developer.apple.com/library/content/samplecode/SpeedSketch/Introduction/Intro.html
+
+
 import UIKit
-import QuartzCore
+import Foundation
 import RealmSwift
 
 class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
     
     let realm = try! Realm() //NEED TO CATCH EXCEPTION HERE!!
-    var data: Results<NoteObject>!
-    var isNewItem: Bool?
-    var selectedNote: NoteObject?
+    var data: Results<Note>!
+    var isNewItem: Bool!
+    var selectedNote: Note?
     var canvasView: StrokeCGView!
     var pageFinish: CGFloat!
     
     var cgView: StrokeCGView!
-    //var leftRingControl: RingControl!
+    var savedView: Bool = false
     
     var fingerStrokeRecognizer: StrokeGestureRecognizer!
     var pencilStrokeRecognizer: StrokeGestureRecognizer!
@@ -28,41 +30,63 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
     var strokeCollection = StrokeCollection()
     var scrollView: UIScrollView!
     var imageView: UIImageView!
+    var pageAdd: CGFloat!
+    
+    var undoStokes: Array<Stroke> = []
+    @IBOutlet weak var redoButton: UIBarButtonItem!
+    @IBOutlet weak var undoButton: UIBarButtonItem!
+    
+    var startTimer = Timer() //timer for autosave
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         let flexibleDimensions: UIViewAutoresizing = [.flexibleWidth, .flexibleHeight]
         
-        let scrollView = UIScrollView(frame: CGRect(x: 0.0, y: 108.0, width: view.frame.size.width, height: view.frame.size.height))
+        let scrollView = UIScrollView(frame: CGRect(x: 0.0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height))
         scrollView.autoresizingMask = flexibleDimensions
         view.insertSubview(scrollView, at: 0)
         self.scrollView = scrollView
         
-        let imageSetup = UIImageView(frame: CGRect(x: 0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height))
-        self.imageView = imageSetup
-        scrollView.addSubview(imageSetup)
+        if !(isNewItem) {
+            savedView = true
+            
+            let imageSetup = UIImageView(frame: CGRect(x: CGFloat(selectedNote!.x), y: CGFloat(selectedNote!.y), width: CGFloat(selectedNote!.width), height: CGFloat(selectedNote!.height)))
+            self.imageView = imageSetup
+            scrollView.addSubview(imageSetup)
+            
+            let canvasView = StrokeCGView(frame: CGRect(x: CGFloat(selectedNote!.x), y: CGFloat(selectedNote!.y), width: CGFloat(selectedNote!.width), height: CGFloat(selectedNote!.height)))
+            canvasView.autoresizingMask = flexibleDimensions
+            self.cgView = canvasView
+            
+        } else {
+            let imageSetup = UIImageView(frame: CGRect(x: 0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height))
+            self.imageView = imageSetup
+            scrollView.addSubview(imageSetup)
+            
+            let canvasView = StrokeCGView(frame: CGRect(x: 0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height))
+            canvasView.autoresizingMask = flexibleDimensions
+            self.cgView = canvasView
+        }
+        
         imageView.backgroundColor = UIColor.clear
         
-        let canvasView = StrokeCGView(frame: CGRect(x: 0, y: 0.0, width: view.frame.size.width, height: view.frame.size.height))
-        canvasView.autoresizingMask = flexibleDimensions
-        
-        self.cgView = canvasView
+        pageAdd = view.frame.size.height
         
         cgView.isUserInteractionEnabled = true
-        pageFinish = canvasView.frame.size.height
+        pageFinish = view.frame.size.height
         
-        
+        //set up scroll options
         scrollView.contentSize = cgView.bounds.size
         scrollView.isUserInteractionEnabled = true
         scrollView.isPagingEnabled = true
-        scrollView.addSubview(canvasView)
-        
-        print(scrollView.subviews)
-        print(scrollView.subviews.count)
+        scrollView.delegate = self
+        scrollView.addSubview(cgView)
         
         view.backgroundColor = UIColor.white
         
+        //set up image view options
         imageView.isUserInteractionEnabled = true
         imageView.backgroundColor = UIColor.white
         cgView.backgroundColor = .clear
@@ -70,13 +94,14 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         
         scrollView.panGestureRecognizer.allowedTouchTypes = [UITouchType.direct.rawValue as NSNumber]
         scrollView.pinchGestureRecognizer?.allowedTouchTypes = [UITouchType.direct.rawValue as NSNumber]
-        scrollView.delegate = self
+        
         
         
         // We put our UI elements on top of the scroll view, so we don't want any of the
         // delay or cancel machinery in place.
         scrollView.delaysContentTouches = false
         
+        //set finger stroke recongiser on scroll view, allows scroll
         let fingerStrokeRecognizer = StrokeGestureRecognizer(target: self, action: #selector(strokeUpdated(_:)))
         fingerStrokeRecognizer.delegate = self
         fingerStrokeRecognizer.cancelsTouchesInView = false
@@ -85,6 +110,7 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         fingerStrokeRecognizer.isForPencil = false
         self.fingerStrokeRecognizer = fingerStrokeRecognizer
         
+        //set penicl stroke recongiser, allows drawing
         let pencilStrokeRecognizer = StrokeGestureRecognizer(target: self, action: #selector(strokeUpdated(_:)))
         pencilStrokeRecognizer.delegate = self
         pencilStrokeRecognizer.cancelsTouchesInView = false
@@ -94,48 +120,97 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         self.pencilStrokeRecognizer = pencilStrokeRecognizer
         
         setupPencilUI()
-        
-        if !(isNewItem!) {
+        if !(isNewItem) {
             let myImage = loadNote(fileURL: selectedNote!.directoryPath)
             imageView.image = myImage
         }
+        
+        //set up timer for autosave
+
+        
+        //disable undo and redo buttons
+        undoButton.isEnabled = false
+        redoButton.isEnabled = false
+        
     }
-    
+    //add another page to the document
     @IBAction func addPage() {
-        cgView.frame.size.height = pageFinish + 1024
+        cgView.frame.size.height = pageFinish + pageAdd
         scrollView.contentSize = cgView.bounds.size
-        cgView.setNeedsDisplay()
-        pageFinish = (pageFinish + 1024)
+        cgView.setNeedsDisplay() //refresh view
+        pageFinish = (pageFinish + pageAdd)
         
     }
     
+    @IBAction func calligraphyBrush() {
+        self.cgView.displayOptions = .calligraphy
+    }
+
+    @IBAction func inkBrush() {
+        self.cgView.displayOptions = .ink
+    }
     
-    @IBAction func saveButton() {
+    @IBAction func undo() {
+        let lastStroke = self.cgView.strokeCollection?.strokes.last //get the last stroke
+        let removeIndex = self.cgView.strokeCollection?.strokes.count //get the stroke index count
+        if undoStokes.count == 10 { //only collect the last 10 undo items
+            undoStokes = []
+        }
+        undoStokes.append(lastStroke!) //save last stroke so that it can be available for redo
+        self.cgView.strokeCollection?.strokes.remove(at: removeIndex! - 1) //remove stroke
+        redoButton.isEnabled = true
+        cgView.setNeedsDisplay()
+    }
+
+    
+    @IBAction func redo() {
+        let lastUndoStroke = undoStokes.last!
+        self.cgView.strokeCollection?.strokes.append(lastUndoStroke)
+        undoStokes.remove(at: undoStokes.count - 1)
+        if undoStokes.count == 0 {
+            redoButton.isEnabled = false //disable the button so that user cannot undo on empty item
+        }
+        cgView.setNeedsDisplay()
+    }
+    
+    func save() {
         
         let currentDate = NSDate()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMMM dd, yyyy, HH:mm:ssZZZZZ"
+        dateFormatter.dateFormat = "EEEE, MMMM dd, yyyy, HH:mm:ss" //get current date and time
         let convertedDate = dateFormatter.string(from: currentDate as Date)
+        let noteHeight = Double(cgView.frame.size.height)
+        let noteWidth = Double(cgView.frame.size.width)
+        let noteX = Double(cgView.frame.origin.x)
+        let noteY = Double(cgView.frame.origin.y)
         
-        if !(isNewItem!) {
+        if !(isNewItem) || savedView { //check if the document has been saved before
             let note = selectedNote!
             let notePath = note.directoryPath
             let filePath = documentDirectory().appendingPathComponent(notePath)
             
-            let noteImage = captureNote()
+            let noteImage = captureNote() //get an image of the note
             let image = UIImagePNGRepresentation(noteImage)
             
-            try! image?.write(to: filePath, options: .atomic)
+            try! image?.write(to: filePath, options: .atomic) //save as an image
             
-            try! realm.write {
+            try! realm.write { //write a new note object
                 note.modified = currentDate
+                note.width = noteWidth
+                note.height = noteHeight
+                note.x = noteX
+                note.y = noteY
             }
             
-        } else {
+        } else { //if it hasn't been saved before
         
-            let newNote = NoteObject()
+            let newNote = Note()
             newNote.name = convertedDate
             newNote.created = currentDate
+            newNote.x = noteX
+            newNote.y = noteY
+            newNote.width = noteWidth
+            newNote.height = noteHeight
             
             let image = captureNote()
             let imageData = UIImagePNGRepresentation(image)
@@ -151,29 +226,22 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
                 realm.add(newNote)
             }
             
-                //            UIGraphicsBeginPDFContextToFile(fileURL.path, cgView.bounds, nil)
-                //            UIGraphicsBeginPDFPageWithInfo(cgView.bounds, nil)
-                //
-                //            let context = UIGraphicsGetCurrentContext()!
-                //
-                //            //cgView.drawHierarchy(in: cgView.bounds, afterScreenUpdates: false)
-                //            UIGraphicsPDFRenderer(bounds: cgView.bounds)
-                //
-                //            UIGraphicsEndPDFContext()
-            
+            savedView = true
+            selectedNote = newNote
         }
+        
+
     }
     
-    func loadNote(fileURL: String) -> UIImage {
+    func loadNote(fileURL: String) -> UIImage { //get the image from the device
         let documents = documentDirectory()
         let filePath = documents.appendingPathComponent(fileURL)
         let image = UIImage(contentsOfFile: filePath.path)
         return image!
     }
     
-    func documentDirectory()-> URL {
+    func documentDirectory()-> URL { //document sandbox path in device
         
-            
         let documentsURL = try! FileManager.default.url(
             for: .documentDirectory,
             in: .userDomainMask,
@@ -184,29 +252,29 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         
     }
     
-    func captureNote() -> UIImage {
+    func captureNote() -> UIImage { //get the note
         
-        UIGraphicsBeginImageContextWithOptions(cgView.bounds.size, false, 0.0)
-        cgView.drawHierarchy(in: view.bounds, afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
+        
+        let context = UIGraphicsGetCurrentContext()!
+        imageView.drawHierarchy(in: view.bounds, afterScreenUpdates: true) //first get the image view image
+        context.saveGState() //save context state
+        cgView.drawHierarchy(in: view.bounds, afterScreenUpdates: true) //get the recently drawn stuff
+        context.restoreGState() //restore state
+        let image = UIGraphicsGetImageFromCurrentImageContext(); //get image
+        
         UIGraphicsEndImageContext();
         
         return image!
     }
+
     
     
-    @IBAction func btnPushButton(button: ColourButton) {
-        if button.isBlueButton {
-            let blue = UIColor(red: 0.1215686275, green: 0.5921568627, blue: 1.0, alpha: 1.0)
-            cgView.strokeColor = blue
-            cgView.fillColorRegular = blue.cgColor
-        } else if button.isBlackButton {
-            cgView.strokeColor = UIColor.black
-            cgView.fillColorRegular = UIColor.black.cgColor
-        } else if button.isRedButton {
-            let red = UIColor(red: 0.9803921569, green: 0.1607843137, blue: 0.2784313725, alpha: 1.0)
-            cgView.strokeColor = red
-            cgView.fillColorRegular = red.cgColor
+    @IBAction func btnPushButton(button: ColourButton) { //erase items
+        if button.isBlackButton {
+            let black = UIColor.black
+            cgView.strokeColor = black
+            cgView.fillColorRegular = black.cgColor
         } else if button.eraser {
             let white = UIColor.white
             cgView.strokeColor = white
@@ -232,12 +300,7 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         stroke.clearUpdateInfo()
     }
     
-    func clearButtonAction(_ sender: AnyObject) {
-        self.strokeCollection = StrokeCollection()
-        cgView.strokeCollection = self.strokeCollection
-    }
-    
-    func strokeUpdated(_ strokeGesture: StrokeGestureRecognizer) {
+    func strokeUpdated(_ strokeGesture: StrokeGestureRecognizer) { //detects when stroke is being drawn
         
         if strokeGesture === pencilStrokeRecognizer {
             lastSeenPencilInteraction = Date.timeIntervalSinceReferenceDate
@@ -249,7 +312,6 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
             if strokeGesture.state == .began ||
                 (strokeGesture.state == .ended && strokeCollection.activeStroke == nil) {
                 strokeCollection.activeStroke = stroke
-                //leftRingControl.cancelInteraction()
             }
         } else {
             strokeCollection.activeStroke = nil
@@ -268,16 +330,14 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         cgView.strokeCollection = strokeCollection
+        
+        //enable undo button when user draws on screen
+        undoButton.isEnabled = true
+        self.startTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(CanvasMainViewController.save), userInfo: nil, repeats: true)
     }
     
     
     // MARK: Pencil Recognition and UI Adjustments
-    /*
-     Since usage of the Apple Pencil can be very temporary, the best way to
-     actually check for it being in use is to remember the last interaction.
-     Also make sure to provide an escape hatch if you modify your UI for
-     times when the pencil is in use vs. not.
-     */
     
     // Timeout the pencil mode if no pencil has been seen for 5 minutes and the app is brought back in foreground.
     let pencilResetInterval = TimeInterval(60.0 * 5)
@@ -299,6 +359,7 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
                 if self.pencilMode &&
                     (self.lastSeenPencilInteraction == nil ||
                         Date.timeIntervalSinceReferenceDate - self.lastSeenPencilInteraction! > self.pencilResetInterval) {
+                    self.startTimer.invalidate()
                 }
             }
         )
@@ -311,18 +372,19 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         for closure in notificationObservers {
             defaultCenter.removeObserver(closure)
         }
+
     }
     
     var pencilMode = false {
         didSet {
             if pencilMode {
-                scrollView.panGestureRecognizer.minimumNumberOfTouches = 1
+                scrollView.panGestureRecognizer.minimumNumberOfTouches = 1 //if finger is used, scroll
                 if let view = fingerStrokeRecognizer.view {
                     view.removeGestureRecognizer(fingerStrokeRecognizer)
                 }
             } else {
-                scrollView.panGestureRecognizer.minimumNumberOfTouches = 2
-                if fingerStrokeRecognizer.view == nil {
+                scrollView.panGestureRecognizer.minimumNumberOfTouches = 1 //enable scroll right away if pencil is not being used
+                if fingerStrokeRecognizer.view == nil { //set fingerStrokeRecongiser if it is not in the view
                     scrollView.addGestureRecognizer(fingerStrokeRecognizer)
                 }
             }
@@ -339,28 +401,10 @@ class CanvasMainViewController: UIViewController, UIGestureRecognizerDelegate {
         return false
     }
     
-    
 }
 
 extension CanvasMainViewController: UIScrollViewDelegate {
     
-    //    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-    //        return self.canvasContainerView
-    //    }
-    
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        var desiredScale = self.traitCollection.displayScale
-        let existingScale = cgView.contentScaleFactor
-        
-        if scale >= 2.0 {
-            desiredScale *= 2.0
-        }
-        
-        if abs(desiredScale - existingScale) > 0.00001 {
-            cgView.contentScaleFactor = desiredScale
-            cgView.setNeedsDisplay()
-        }
-    }
 }
 
 

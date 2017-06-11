@@ -4,12 +4,13 @@
 //
 //  Created by Nicola Thouliss on 7/06/2017.
 //  Copyright © 2017 nstho4. All rights reserved.
-//
+// https://developer.apple.com/library/content/samplecode/SpeedSketch/Introduction/Intro.html
 
 
 import Foundation
 import UIKit
 
+//collection of strokes
 class StrokeCollection {
     var strokes: [Stroke] = []
     var activeStroke: Stroke?
@@ -22,6 +23,7 @@ class StrokeCollection {
     }
 }
 
+//what phase the stroke is in
 enum StrokePhase {
     case began
     case changed
@@ -29,12 +31,13 @@ enum StrokePhase {
     case cancelled
 }
 
+//collection of the moved points on the screen to create a stroke
 struct StrokeSample {
     // Always.
     let timestamp: TimeInterval
     let location: CGPoint
     
-    // 3D Touch or Pencil.
+    // the force of the touch
     var force: CGFloat?
     
     // Pencil only.
@@ -66,6 +69,7 @@ struct StrokeSample {
     }
     
     /// Returns the force perpendicular to the screen. The regular stylus force is along the pencil axis.
+    //This is needed to reduce latency, as this is also communicated by the pencil but over air
     var perpendicularForce: CGFloat {
         let force = forceWithDefault
         if let altitude = altitude {
@@ -86,9 +90,9 @@ enum StrokeState {
     case done
     case cancelled
 }
-
+//creation of the stroke after the sample has been collected
 class Stroke {
-    //static let calligraphyFallbackAzimuthUnitVector = CGVector(dx: 1.0, dy:1.0).normalize!
+    static let calligraphyFallbackAzimuthUnitVector = CGVector(dx: 1.0, dy:1.0).normalize!
     
     var samples: [StrokeSample] = []
     var predictedSamples: [StrokeSample] = []
@@ -182,6 +186,7 @@ private func interpolatedNormalUnitVector(between vector1: CGVector, and vector2
     }
 }
 
+//breaking down the stoke into segments to seen how touches are collected
 class StrokeSegment {
     var sampleBefore: StrokeSample?
     var fromSample: StrokeSample!

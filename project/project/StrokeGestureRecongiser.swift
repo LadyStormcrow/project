@@ -4,7 +4,7 @@
 //
 //  Created by Nicola Thouliss on 7/06/2017.
 //  Copyright © 2017 nstho4. All rights reserved.
-//
+//  Creation of this class was helped by https://developer.apple.com/library/content/samplecode/SpeedSketch/Introduction/Intro.html
 
 
 import UIKit
@@ -17,10 +17,11 @@ class StrokeGestureRecognizer: UIGestureRecognizer {
     var usesPredictedSamples = true
     var isForPencil: Bool = false {
         didSet {
+            //Determines if the touch type is with a stylus or not
             if (isForPencil) {
-                allowedTouchTypes = [UITouchType.stylus.rawValue as NSNumber]
+                allowedTouchTypes = [UITouchType.stylus.rawValue as NSNumber] //Stylus
             } else {
-                allowedTouchTypes = [UITouchType.direct.rawValue as NSNumber]
+                allowedTouchTypes = [UITouchType.direct.rawValue as NSNumber] //Finger/Direct touch
             }
         }
     }
@@ -77,6 +78,7 @@ class StrokeGestureRecognizer: UIGestureRecognizer {
                     }
                     
                     var sample = StrokeSample(timestamp: touch.timestamp, location: location, coalesced: coalesced, predicted: predicted, force: self.collectForce ? touch.force : nil)
+                    //estimate the stoke
                     if touch.type == .stylus {
                         let estimatedProperties = touch.estimatedProperties
                         sample.estimatedProperties = estimatedProperties
@@ -208,6 +210,7 @@ class StrokeGestureRecognizer: UIGestureRecognizer {
         }
     }
     
+    //reset stroke 
     override func reset() {
         stroke = Stroke()
         trackedTouch = nil
